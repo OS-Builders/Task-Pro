@@ -34,6 +34,7 @@ const Signup = ({ username, setUsername, setLoggingIn }: SignupProps) => {
   //       passwordType = "password";
   //     }
   //   };
+
   return (
     <div className="auth-wrapper">
       <form className="auth-form" onSubmit={handleFormSubmit}>
