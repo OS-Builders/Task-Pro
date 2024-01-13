@@ -1,12 +1,12 @@
-import { SignupProps, FormState } from "../types";
-import { useState, useEffect } from "react";
+import { SignupProps, FormState } from '../types';
+import { useState, useEffect } from 'react';
 
 const Signup = ({ username, setUsername, setLoggingIn }: SignupProps) => {
   const [formData, setFormData] = useState<FormState>({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [passwordsMatch, setPasswordsMatch] = useState(false);
 
@@ -18,7 +18,7 @@ const Signup = ({ username, setUsername, setLoggingIn }: SignupProps) => {
   const handleFormSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     // FETCH REQUEST HERE
-    console.log("formData on login", formData);
+    console.log('formData on login', formData);
   };
 
   useEffect(() => {
@@ -36,74 +36,73 @@ const Signup = ({ username, setUsername, setLoggingIn }: SignupProps) => {
   //   };
 
   return (
-    <div className="auth-wrapper">
-      <form className="auth-form" onSubmit={handleFormSubmit}>
-        <label>Username: </label>
+    <div className='auth-wrapper'>
+      <form className='auth-form' onSubmit={handleFormSubmit}>
+        <label>Username </label>
         <input
-          className="auth-input"
-          name="username"
-          type="text"
-          placeholder="Username"
+          className='auth-input'
+          name='username'
+          type='text'
+          placeholder='Username'
           value={formData.username}
           onChange={handleInputChange}
           required
         />
 
-        <label>Email: </label>
+        <label>Email </label>
         <input
-          className="auth-input"
-          name="email"
-          type="text"
-          placeholder="Email"
+          className='auth-input'
+          name='email'
+          type='text'
+          placeholder='Email'
           value={formData.email}
           onChange={handleInputChange}
           required
         />
 
-        <label>Password: </label>
+        <label>Password </label>
         <input
-          className="auth-input"
-          name="password"
-          type="password"
-          placeholder="Password"
+          className='auth-input'
+          name='password'
+          type='password'
+          placeholder='Password'
           value={formData.password}
           onChange={handleInputChange}
           required
         />
 
-        <label>Confirm Password: </label>
+        <label>Confirm Password </label>
         <input
-          className="auth-input"
-          name="confirmPassword"
-          type="password"
-          placeholder="confirmPassword"
+          className='auth-input'
+          name='confirmPassword'
+          type='password'
+          placeholder='Confirm Password'
           value={formData.confirmPassword}
           onChange={handleInputChange}
           required
         />
 
         {passwordsMatch ? null : (
-          <p className="auth-confirm">Password does not match!</p>
+          <p className='auth-confirm'>Password does not match!</p>
         )}
         {/* <input type="checkbox" id="toggle-password" onClick={checkType} />
         <label htmlFor="toggle-password">Show Password</label> */}
         <button
-          className="auth-submit"
-          type="submit"
+          className='auth-submit'
+          type='submit'
           disabled={!passwordsMatch}
         >
           Sign Up
         </button>
+        <button
+          className='auth-switch'
+          onClick={() => {
+            setLoggingIn(true);
+          }}
+        >
+          Back to login
+        </button>
       </form>
-
-      <button
-        className="toggle-auth"
-        onClick={() => {
-          setLoggingIn(true);
-        }}
-      >
-        Back to login
-      </button>
     </div>
   );
 };

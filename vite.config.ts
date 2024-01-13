@@ -1,21 +1,21 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import "dotenv/config";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import 'dotenv/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api1": {
+      '/user': {
         target:
-          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+          `http://localhost:${process.env.PORT}` || 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
       },
-      "/api2": {
+      '/api2': {
         target:
-          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+          `http://localhost:${process.env.PORT}` || 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
       },
