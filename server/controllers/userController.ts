@@ -29,8 +29,9 @@ const userController = {
       res.locals.username = user.username;
       return next();
     } catch (err) {
+      // send any errors to global error handler
       return next({
-        log: `usersController.createUser ERROR: ${err}`,
+        log: `userController.createUser ERROR: ${err}`,
         status: 500,
         message: { err: "Error occured creating user" },
       });
@@ -39,7 +40,9 @@ const userController = {
 
   // middleware for verifying a user on login
   verifyUser: async (req: Request, res: Response, next: NextFunction) => {
+    // obtain user name password from request body
     const { username, password } = req.body;
+    // check for a missing input
     if (!username || !password) {
       return next({
         log: "Missing username or password in verifyUser",
@@ -48,27 +51,37 @@ const userController = {
       });
     }
     try {
+      // search DB for the user based on the username
       const user = await User.findOne({ username });
+      // if now user is found error out
       if (!user) {
         return next({
-          log: "User does not exist",
+          log: `userController.verifyUser ERROR: no user with input username found in DB`,
           status: 400,
           message: { err: "Invalid username or password" },
         });
       } else {
+        // else a user is found, check passwords
         const resultPassword = await bcrypt.compare(password, user.password);
+        // if passwords do not match error out
         if (!resultPassword) {
           return next({
-            log: "User does not exist",
+            log: `userController.verifyUser ERROR: input password does not match stored password`,
             status: 400,
             message: { err: "Invalid username or password" },
           });
         }
+        // passwords do match, store username in res.locals to send back to frontend
         res.locals.username = username;
         return next();
       }
     } catch (err) {
-      return next();
+      // send any errors to global error handler
+      return next({
+        log: `usersController.createUser ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error occured creating user" },
+      });
     }
   },
 };
