@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import { userRouter } from "./routes/userRouter.ts";
+import userRouter from "./routes/userRouter.ts";
 
 // start the DB
 const mongoUri = process.env.MONGO_URI;
