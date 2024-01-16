@@ -1,5 +1,5 @@
-import User from "../models/userModel";
-import bcrypt from "bcrypt";
+import User from "../models/userModel.ts";
+import bcrypt from "bcryptjs";
 import { NextFunction, Request, Response } from "express";
 
 const userController = {
