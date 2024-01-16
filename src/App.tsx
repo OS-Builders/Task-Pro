@@ -9,12 +9,7 @@ function App() {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Authentication username={username} setUsername={setUsername} />
-        }
-      />
+      <Route path="/" element={<Authentication setUsername={setUsername} />} />
       <Route path="/dashboard" element={<Dashboard username={username} />} />
     </Routes>
   );

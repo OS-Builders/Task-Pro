@@ -5,7 +5,7 @@ import { AuthProps } from "../types.ts";
 import "../scss/authContainer.scss";
 import "../scss/authWrapper.scss";
 
-const Authentication = ({ username, setUsername }: AuthProps) => {
+const Authentication = ({ setUsername }: AuthProps) => {
   // use state to swap between logging in and signing in
   const [loggingIn, setLoggingIn] = useState(true);
   return (
