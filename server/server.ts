@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // serve static files
 app.use(express.static(join(__dirname, "../dist")));
