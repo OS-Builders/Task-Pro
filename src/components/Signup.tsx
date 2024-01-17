@@ -11,7 +11,7 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
     password: "",
     confirmPassword: "",
   });
-  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(false);
 
   // update form data as user input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,8 +23,8 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // send post request to /user/signup with formData in body
-    const body = JSON.stringify(formData);
-    const response = await fetch("/user/signup", {
+    const body: string = JSON.stringify(formData);
+    const response: Response = await fetch("/user/signup", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -32,7 +32,7 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
       body: body,
     });
     // receive username from backend
-    const user = await response.json();
+    const user: string = await response.json();
     // if request success, save username to state and route to dashboard
     if (response.status === 200) {
       setUsername(user);
@@ -44,15 +44,6 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
     if (formData.password === formData.confirmPassword) setPasswordsMatch(true);
     else setPasswordsMatch(false);
   }, [formData]);
-
-  //   let passwordType: string = "password";
-  //   const checkType = () => {
-  //     if (passwordType === "password") {
-  //       passwordType = "text";
-  //     } else {
-  //       passwordType = "password";
-  //     }
-  //   };
 
   return (
     <div className="auth-wrapper">
@@ -104,8 +95,7 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
         {passwordsMatch ? null : (
           <p className="auth-confirm">Password does not match!</p>
         )}
-        {/* <input type="checkbox" id="toggle-password" onClick={checkType} />
-        <label htmlFor="toggle-password">Show Password</label> */}
+
         <button
           className="auth-submit"
           type="submit"

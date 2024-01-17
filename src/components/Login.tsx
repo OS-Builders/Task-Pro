@@ -8,6 +8,7 @@ const Login = ({ setUsername, setLoggingIn }: SignupProps) => {
     username: "",
     password: "",
   });
+  const [loginFail, setLoginFail] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,8 +18,8 @@ const Login = ({ setUsername, setLoggingIn }: SignupProps) => {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // send post request to /user/login with formData in body
-    const body = JSON.stringify(formData);
-    const response = await fetch("/user/login", {
+    const body: string = JSON.stringify(formData);
+    const response: Response = await fetch("/user/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -26,11 +27,14 @@ const Login = ({ setUsername, setLoggingIn }: SignupProps) => {
       body: body,
     });
     // receive username from backend
-    const user = await response.json();
+    const user: string = await response.json();
     // if request success, save username to state and route to dashboard
     if (response.status === 200) {
       setUsername(user);
+      setLoginFail(false);
       return navigate("/dashboard");
+    } else {
+      setLoginFail(true);
     }
   };
 
@@ -57,6 +61,9 @@ const Login = ({ setUsername, setLoggingIn }: SignupProps) => {
           onChange={handleInputChange}
           required
         />
+        {loginFail ? (
+          <p className="auth-cofinfirm">Username or password incorrect</p>
+        ) : null}
         <button className="auth-submit" type="submit">
           Login
         </button>

@@ -7,6 +7,10 @@ export type AuthProps = {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
 };
 
+export type DashboardProps = {
+  username: string;
+};
+
 export interface FormState {
   username: string;
   email?: string;

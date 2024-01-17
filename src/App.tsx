@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function App() {
   // track the username in state
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState<string>("");
 
   return (
     <Routes>
