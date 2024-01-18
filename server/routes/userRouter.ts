@@ -12,7 +12,7 @@ router.post(
   "/signup",
   userController.createUser,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.username);
+    return res.status(200).json(res.locals.user);
   }
 );
 
@@ -21,7 +21,7 @@ router.post(
   "/login",
   userController.verifyUser,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.username);
+    return res.status(200).json(res.locals.user);
   }
 );
 

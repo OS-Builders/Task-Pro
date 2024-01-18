@@ -9,7 +9,7 @@ import boardsController from "../controllers/boardsController.ts";
 
 // route for getting board names
 router.get(
-  "/:user",
+  "/:userId",
   boardsController.getBoardNames,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.boardNames);

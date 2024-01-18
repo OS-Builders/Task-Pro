@@ -1,17 +1,19 @@
 import { ContainerProps } from "../types";
 import { useEffect, useState } from "react";
 
-const LeftContainer = ({ username, setCurrentBoard }: ContainerProps) => {
+const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
   //creating state to store the list of board names
   const [boardList, setBoardList] = useState([]);
   // make a request for all board naames, return an array containing strings of the board names
-  const fetchBoardList = async () => {
-    const reponse: Response = await fetch(`/boards/${username}`);
-    const list = await reponse.json();
-    setBoardList(list);
-    console.log(boardList);
-  };
-  fetchBoardList().catch(console.error);
+  useEffect(() => {
+    const fetchBoardList = async () => {
+      const reponse: Response = await fetch(`/boards/${user.id}`);
+      const list = await reponse.json();
+      setBoardList(list);
+      console.log(boardList);
+    };
+    fetchBoardList().catch(console.error);
+  }, []);
 
   // function for changing board when click selection button
   const handleBoardSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,7 +31,11 @@ const LeftContainer = ({ username, setCurrentBoard }: ContainerProps) => {
   const boardSelectors = [];
   for (let i = 0; i < boardList.length; i++) {
     boardSelectors.push(
-      <button onClick={handleBoardSelect} name={boardList[i]}>
+      <button
+        className="board-selector"
+        onClick={handleBoardSelect}
+        name={boardList[i]}
+      >
         boardList[i]
       </button>
     );
@@ -37,7 +43,7 @@ const LeftContainer = ({ username, setCurrentBoard }: ContainerProps) => {
 
   return (
     <div className="left-container">
-      <h2>Hello {username}</h2>
+      <h2>Hello {user.name}</h2>
       <h1>My Boards</h1>
       <button onClick={handleCreateBoard}>Create New Board +</button>
       <div>{boardSelectors}</div>

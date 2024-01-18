@@ -2,7 +2,7 @@ import { SignupProps, FormState } from "../types";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
-const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
+const Signup = ({ setUser, setLoggingIn }: SignupProps) => {
   const navigate = useNavigate();
   // save the signup info into state
   const [formData, setFormData] = useState<FormState>({
@@ -32,10 +32,10 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
       body: body,
     });
     // receive username from backend
-    const user: string = await response.json();
+    const user = await response.json();
     // if request success, save username to state and route to dashboard
     if (response.status === 200) {
-      setUsername(user);
+      setUser(user);
       return navigate("/dashboard");
     }
   };

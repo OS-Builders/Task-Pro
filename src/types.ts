@@ -1,21 +1,26 @@
 export type SignupProps = {
   setLoggingIn: React.Dispatch<React.SetStateAction<boolean>>;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setUser: React.Dispatch<React.SetStateAction<UserState>>;
 };
 
 export type AuthProps = {
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setUser: React.Dispatch<React.SetStateAction<UserState>>;
 };
 
 export type DashboardProps = {
-  username: string;
+  user: UserState;
 };
 
 export type ContainerProps = {
-  username: string;
+  user: UserState;
   currentBoard?: string;
   setCurrentBoard: React.Dispatch<React.SetStateAction<string>>;
 };
+
+export interface UserState {
+  name: string;
+  id: string;
+}
 
 export interface FormState {
   username: string;
