@@ -13,7 +13,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      "/api": {
+      "/boards": {
         target:
           `http://localhost:${process.env.PORT}` || "http://localhost:3000",
         changeOrigin: true,

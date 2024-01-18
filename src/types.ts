@@ -11,6 +11,12 @@ export type DashboardProps = {
   username: string;
 };
 
+export type ContainerProps = {
+  username: string;
+  currentBoard?: string;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<string>>;
+};
+
 export interface FormState {
   username: string;
   email?: string;
