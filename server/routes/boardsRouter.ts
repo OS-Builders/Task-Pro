@@ -10,9 +10,19 @@ import boardsController from "../controllers/boardsController.ts";
 // route for getting board names
 router.get(
   "/:userId",
-  boardsController.getBoardNames,
+  boardsController.getMyBoards,
+  boardsController.getBoardNamesAndIds,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.boardNames);
+    return res.status(200).json(res.locals.namesAndIds);
+  }
+);
+
+router.post(
+  "/create",
+  boardsController.createBoard,
+  boardsController.assignNewBoard,
+  (_req: Request, res: Response) => {
+    return res.sendStatus(200);
   }
 );
 

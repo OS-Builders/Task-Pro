@@ -14,7 +14,13 @@ export type DashboardProps = {
 export type ContainerProps = {
   user: UserState;
   currentBoard?: string;
-  setCurrentBoard: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+};
+
+export type CreateBoardModalProps = {
+  setCreatingBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  user: UserState;
 };
 
 export interface UserState {
@@ -27,4 +33,14 @@ export interface FormState {
   email?: string;
   password: string;
   confirmPassword?: string;
+}
+
+export interface CurrentBoardState {
+  name: string;
+  id: string;
+}
+
+export interface BoardListItemState {
+  name: string;
+  id: string;
 }

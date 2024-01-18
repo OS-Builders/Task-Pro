@@ -1,12 +1,15 @@
 import LeftContainer from "../containers/LeftContainer";
 import MainContainer from "../containers/MainContainer";
-import { DashboardProps } from "../types";
+import { DashboardProps, CurrentBoardState } from "../types";
 import { useState } from "react";
 import "../scss/Dashboard.scss";
 
 const Dashboard = ({ user }: DashboardProps) => {
   // state of current board selected
-  const [currentBoard, setCurrentBoard] = useState<string>("");
+  const [currentBoard, setCurrentBoard] = useState<CurrentBoardState>({
+    name: "",
+    id: "",
+  });
   //state confirmDelete false
   return (
     <div className="main-page">
