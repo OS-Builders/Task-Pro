@@ -8,7 +8,9 @@ const boardsController = {
     try {
       // find all boards beloning to the user, push board names into an array and save on locals
       console.log("req.params.userId: ", req.params.userId);
-      const user = await User.findOne({ _id: req.params.userId });
+      const user = await User.findOne({ _id: req.params.userId }).populate(
+        "boards"
+      );
       if (!user) {
         return next({
           log: `boardsController.getMyBoards ERROR: User cannot be found.`,
@@ -33,14 +35,17 @@ const boardsController = {
     next: NextFunction
   ) => {
     try {
+      console.log("res.locals.boards: ", res.locals.boards);
       const namesAndIds: BoardListItemState[] = [];
       res.locals.boards.forEach((board: any) => {
+        console.log("board.name: ", board.name);
         namesAndIds.push({
           name: board.name,
           id: board._id,
         });
       });
       res.locals.namesAndIds = namesAndIds;
+      console.log("res.locals.namesAndIds: ", res.locals.namesAndIds);
       return next();
     } catch (err) {
       // pass error through to global error handler
@@ -53,8 +58,9 @@ const boardsController = {
   },
   createBoard: async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log("req.body.boardName: ", req.body.boardName);
       const createdBoard = await Board.create({
-        name: req.body.name,
+        name: req.body.boardName,
         backlog: [],
         inProgress: [],
         inReview: [],

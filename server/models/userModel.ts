@@ -7,7 +7,7 @@ const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, unique: true },
-  boards: [{ type: Schema.Types.ObjectId, ref: "board" }],
+  boards: [{ type: Schema.Types.ObjectId, ref: "Board" }],
 });
 
 type User = InferSchemaType<typeof userSchema>;

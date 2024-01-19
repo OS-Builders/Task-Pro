@@ -1,6 +1,7 @@
 import { ContainerProps, BoardListItemState } from "../types";
 import { useEffect, useState } from "react";
 import CreateBoardModal from "../components/CreateBoardModal";
+import "../scss/leftContainer.scss";
 
 const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
   // creating state to open board creating modal
@@ -13,7 +14,7 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
       const reponse: Response = await fetch(`/boards/${user.id}`);
       const list = await reponse.json();
       setBoardList(list);
-      console.log(boardList);
+      console.log("boardList: ", boardList);
     };
     fetchBoardList().catch(console.error);
   }, []);
@@ -37,24 +38,30 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
   // iterate through board names push buttons or components into array boardlist in state
   const boardSelectors = [];
   for (let i = 0; i < boardList.length; i++) {
+    console.log("boardList[i]: ", boardList[i]);
     boardSelectors.push(
       <button
         className="board-selector"
         onClick={handleBoardSelect}
         name={boardList[i].name}
         id={boardList[i].id}
+        key={i}
       >
-        boardList[i].name
+        {boardList[i].name}
       </button>
     );
   }
 
   return (
     <div className="left-container">
-      <h2>Hello {user.name}</h2>
-      <h1>My Boards</h1>
-      <button onClick={handleCreateBoard}>Create New Board +</button>
-      <div>{boardSelectors}</div>
+      <div className="boards-info">
+        <h1 className="heading">{user.name}'s Boards</h1>
+        <button className="new-board-btn" onClick={handleCreateBoard}>
+          Create New Board +
+        </button>
+        <div className="board-selectors">{boardSelectors}</div>
+      </div>
+      <button className="settings-btn">Settings</button>
       {creatingBoard ? (
         <CreateBoardModal
           setCreatingBoard={setCreatingBoard}

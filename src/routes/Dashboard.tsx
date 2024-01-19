@@ -2,7 +2,7 @@ import LeftContainer from "../containers/LeftContainer";
 import MainContainer from "../containers/MainContainer";
 import { DashboardProps, CurrentBoardState } from "../types";
 import { useState } from "react";
-import "../scss/Dashboard.scss";
+import "../scss/dashBoard.scss";
 
 const Dashboard = ({ user }: DashboardProps) => {
   // state of current board selected

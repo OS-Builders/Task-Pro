@@ -1,3 +1,13 @@
+html {
+  height: 100vh;
+}
+
 body {
   background-color: rgb(32, 32, 31);
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }

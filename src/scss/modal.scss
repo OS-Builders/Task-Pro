@@ -1,0 +1,68 @@
+.modal-overlay {
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(48, 48, 48);
+    padding: 30px;
+    width: 35%;
+    border-radius: 20px;
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .modal-title {
+        margin: 0;
+        text-align: center;
+        font-size: 32px;
+        color: goldenrod;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      .modal-input {
+        margin-bottom: 10px;
+        padding: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 18px;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      .modal-btns {
+        display: flex;
+        gap: 20px;
+
+        button {
+          font-size: 18px;
+          font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+            "Lucida Sans", Arial, sans-serif;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 10px;
+        }
+
+        .modal-submit {
+          background-color: #4caf50;
+        }
+
+        .modal-cancel {
+          background-color: goldenrod;
+        }
+      }
+    }
+  }
+}

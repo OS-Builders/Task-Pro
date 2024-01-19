@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import { CreateBoardModalProps } from "../types";
 import { useState } from "react";
+import "../scss/modal.scss";
 
 const CreateBoardModal = ({
   setCreatingBoard,
@@ -33,33 +34,38 @@ const CreateBoardModal = ({
       setCreatingBoard(false);
       setCurrentBoard(response.name);
     } else {
+      console.log("Board creation failed");
     }
   };
 
   return createPortal(
-    <div className="create-board-modal">
-      <h2>New Board</h2>
-      <form className="modal-form" onSubmit={handleFormSubmit}>
-        <input
-          className="modal-input"
-          name="boardname"
-          type="text"
-          placeholder="Enter Board Name"
-          onChange={handleInputChange}
-          required
-        />
-        <button className="board-submit" type="submit">
-          Save
-        </button>
-        <button
-          className="cancel-btn"
-          onClick={() => {
-            setCreatingBoard(false);
-          }}
-        >
-          Cancel
-        </button>
-      </form>
+    <div className="modal-overlay">
+      <div className="modal">
+        <form className="modal-form" onSubmit={handleFormSubmit}>
+          <h2 className="modal-title">New Board</h2>
+          <input
+            className="modal-input"
+            name="boardname"
+            type="text"
+            placeholder="Enter Board Name"
+            onChange={handleInputChange}
+            required
+          />
+          <div className="modal-btns">
+            <button className="modal-submit" type="submit">
+              Save
+            </button>
+            <button
+              className="modal-cancel"
+              onClick={() => {
+                setCreatingBoard(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>,
     document.getElementById("portal") as Element
   );
