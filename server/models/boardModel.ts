@@ -9,7 +9,7 @@ const boardSchema = new Schema({
   inProgress: [{ type: Schema.Types.ObjectId, ref: 'Card' }],
   inReview: [{ type: Schema.Types.ObjectId, ref: 'Card' }],
   completed: [{ type: Schema.Types.ObjectId, ref: 'Card' }],
-  boardOwner: { type: Schema.Types.ObjectId, ref: 'user' },
+  boardOwner: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 type Board = InferSchemaType<typeof boardSchema>;
