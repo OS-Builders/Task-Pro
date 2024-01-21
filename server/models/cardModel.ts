@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { InferSchemaType } from "mongoose";
+import mongoose from 'mongoose';
+import { InferSchemaType } from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -12,4 +12,4 @@ const cardSchema = new Schema({
 
 type Card = InferSchemaType<typeof cardSchema>;
 
-export default mongoose.model<Card>("Card", cardSchema);
+export default mongoose.model<Card>('Card', cardSchema);

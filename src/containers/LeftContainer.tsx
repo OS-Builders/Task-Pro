@@ -9,6 +9,7 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
   // creating state to store the list of board names
   const [boardList, setBoardList] = useState<BoardListItemState[]>([]);
   // make a request for all board naames, return an array containing strings of the board names
+  console.log(user);
   useEffect(() => {
     const fetchBoardList = async () => {
       const reponse: Response = await fetch(`/boards/${user.id}`);
