@@ -31,8 +31,9 @@ const CreateBoardModal = ({
     // receive username from backend
     // if request success, save username to state and route to dashboard
     if (response.status === 200) {
+      const responseData = await response.json();
       setCreatingBoard(false);
-      setCurrentBoard(response.name);
+      setCurrentBoard(responseData.name);
     } else {
       console.log("Board creation failed");
     }

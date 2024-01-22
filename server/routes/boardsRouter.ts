@@ -22,7 +22,7 @@ router.post(
   boardsController.createBoard,
   boardsController.assignNewBoard,
   (_req: Request, res: Response) => {
-    return res.sendStatus(200);
+    return res.sendStatus(200); //may need the board just created data to render into the main container
   }
 );
 
