@@ -11,3 +11,11 @@ body {
 #root {
   height: 100%;
 }
+
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}

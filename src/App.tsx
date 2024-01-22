@@ -3,6 +3,7 @@ import Authentication from './routes/Authentication.tsx';
 import Dashboard from './routes/Dashboard.tsx';
 import { useState } from 'react';
 import { UserState } from './types.ts';
+import './scss/app.scss';
 
 function App() {
   // track the username in state

@@ -1,8 +1,8 @@
 .title {
   font-size: 32px;
   color: goldenrod;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 .title-wrapper {
@@ -14,7 +14,10 @@
   align-items: center;
   justify-content: center;
   width: 300px; /* Adjust width as needed */
-  margin: auto; /* Center horizontally */
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 20px;
   border: 2px solid black;
   border-radius: 8px;

@@ -65,7 +65,7 @@ const Login = ({ setUser, setLoggingIn }: SignupProps) => {
           required
         />
         {loginFail ? (
-          <p className='auth-cofinfirm'>Username or password incorrect</p>
+          <p className='auth-confirm'>Username or password incorrect</p>
         ) : null}
         <button className='auth-submit' type='submit'>
           Login
