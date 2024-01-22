@@ -11,7 +11,8 @@ const CreateBoardModal = ({
   const [boardName, setBoardName] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBoardName(e.target.value);
+    const inputValue: string = e.target.value;
+    setBoardName(inputValue.trim()); //edge case for whitespace
   };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,6 +40,8 @@ const CreateBoardModal = ({
     }
   };
 
+  const isButtonDisabled: boolean = boardName === ''; //checking if boardName is empty? using trim in handle input
+
   return createPortal(
     <div className='modal-overlay'>
       <div className='modal'>
@@ -53,7 +56,11 @@ const CreateBoardModal = ({
             required
           />
           <div className='modal-btns'>
-            <button className='modal-submit' type='submit'>
+            <button
+              className='modal-submit'
+              type='submit'
+              disabled={isButtonDisabled}
+            >
               Save
             </button>
             <button

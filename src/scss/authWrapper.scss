@@ -2,7 +2,7 @@
   width: 300px;
   padding: 20px;
   font-weight: bold;
-  font-size: medium;
+  font-size: large;
   font-family: monospace;
   display: flex;
   flex-direction: column; /* Align items vertically */
@@ -24,19 +24,32 @@
 
 .auth-submit {
   align-self: center;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #61db65;
+  color: black;
   padding: 10px;
   border: 1px solid black;
   border-radius: 4px;
+  width: 100px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    color: white;
+    background-color: #3b8a3e;
+  }
 }
 
 .auth-switch {
   align-self: center;
   margin-top: 10px;
-  background-color: #2196f3;
-  color: #fff;
+  background-color: #2ea1ff;
+  color: black;
   border: 1px solid black;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    color: white;
+    background-color: rgb(24, 97, 157);
+  }
 }

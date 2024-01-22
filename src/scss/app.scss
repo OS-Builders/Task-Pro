@@ -11,3 +11,10 @@ body {
 #root {
   height: 100%;
 }
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Optionally, you can set the height to the viewport height for vertical centering
+}
