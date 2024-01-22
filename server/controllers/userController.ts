@@ -26,7 +26,7 @@ const userController = {
         password: hashedPassword,
       });
       // store the username on res.locals to send back to frontend
-      res.locals.username = user.username;
+      res.locals.user = { id: user._id, name: user.username };
       return next();
     } catch (err) {
       // send any errors to global error handler
@@ -72,7 +72,7 @@ const userController = {
           });
         }
         // passwords do match, store username in res.locals to send back to frontend
-        res.locals.username = username;
+        res.locals.user = { id: user._id, name: user.username };
         return next();
       }
     } catch (err) {

@@ -1,0 +1,143 @@
+.left-container {
+  width: 20%;
+  height: 100%;
+  background-color: rgb(22, 22, 22);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  h1 {
+    padding: 10px;
+  }
+  footer {
+    margin-top: auto;
+    height: 60px;
+  }
+  .setting-button {
+    border: none;
+    background-color: rgb(22, 22, 22);
+    color: white;
+    font-size: x-large;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    letter-spacing: 5px;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: rgb(54, 53, 53);
+      letter-spacing: 15px;
+      color: white(255, 255, 255, 0.7);
+    }
+  }
+}
+.boards-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 450px;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+.board-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: rgb(22, 22, 22);
+  padding: 15px;
+  border: 2px solid rgb(22, 22, 22);
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: large;
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    border: 2px solid #c3ff0e;
+  }
+}
+.selected {
+  border: 2px solid #c3ff0e;
+  transform: scale(1.1);
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(195, 255, 14, 0.5);
+}
+
+//styling for Create board Button
+.new-board-btn {
+  align-self: center;
+  font-size: large;
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: rgb(15, 15, 15);
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 5px;
+
+  &:before {
+    content: '';
+    background: linear-gradient(
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite; //animation apply here
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    border-radius: 10px;
+  }
+  // &:hover {
+  //   background-color: rgb(54, 53, 53);
+  // }
+  &:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(15, 15, 15);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+  &:hover:before {
+    opacity: 1;
+  }
+}
+
+//keyframe is for animated
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

@@ -1,15 +1,15 @@
-import { SignupProps, FormState } from "../types";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { SignupProps, FormState } from '../types';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
-const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
+const Signup = ({ setUser, setLoggingIn }: SignupProps) => {
   const navigate = useNavigate();
   // save the signup info into state
   const [formData, setFormData] = useState<FormState>({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(false);
 
@@ -24,19 +24,19 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
     e.preventDefault();
     // send post request to /user/signup with formData in body
     const body: string = JSON.stringify(formData);
-    const response: Response = await fetch("/user/signup", {
-      method: "POST",
+    const response: Response = await fetch('/user/signup', {
+      method: 'POST',
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        'Content-type': 'application/json; charset=UTF-8',
       },
       body: body,
     });
     // receive username from backend
-    const user: string = await response.json();
+    const user = await response.json();
     // if request success, save username to state and route to dashboard
     if (response.status === 200) {
-      setUsername(user);
-      return navigate("/dashboard");
+      setUser(user);
+      return navigate('/dashboard');
     }
   };
 
@@ -46,65 +46,73 @@ const Signup = ({ setUsername, setLoggingIn }: SignupProps) => {
   }, [formData]);
 
   return (
-    <div className="auth-wrapper">
-      <form className="auth-form" onSubmit={handleFormSubmit}>
-        <label>Username </label>
+    <div className='auth-wrapper'>
+      <form className='auth-form' onSubmit={handleFormSubmit}>
+        <label htmlFor='username'>Username </label>
         <input
-          className="auth-input"
-          name="username"
-          type="text"
-          placeholder="Username"
+          className='auth-input'
+          id='username'
+          name='username'
+          type='text'
+          placeholder='Username'
           value={formData.username}
           onChange={handleInputChange}
+          autoComplete='username'
           required
         />
 
-        <label>Email </label>
+        <label htmlFor='email'>Email </label>
         <input
-          className="auth-input"
-          name="email"
-          type="text"
-          placeholder="Email"
+          className='auth-input'
+          id='email'
+          name='email'
+          type='email'
+          placeholder='Email'
           value={formData.email}
           onChange={handleInputChange}
+          autoComplete='email'
           required
         />
 
-        <label>Password </label>
+        <label htmlFor='password'>Password </label>
         <input
-          className="auth-input"
-          name="password"
-          type="password"
-          placeholder="Password"
+          className='auth-input'
+          id='password'
+          name='password'
+          type='password'
+          placeholder='Password'
           value={formData.password}
           onChange={handleInputChange}
+          autoComplete='new-password'
           required
         />
 
-        <label>Confirm Password </label>
+        <label htmlFor='confirmPassword'>Confirm Password </label>
         <input
-          className="auth-input"
-          name="confirmPassword"
-          type="password"
-          placeholder="Confirm Password"
+          className='auth-input'
+          id='confirmPassword'
+          name='confirmPassword'
+          type='password'
+          placeholder='Confirm Password'
           value={formData.confirmPassword}
           onChange={handleInputChange}
+          autoComplete='new-password'
           required
         />
 
         {passwordsMatch ? null : (
-          <p className="auth-confirm">Password does not match!</p>
+          <p className='auth-confirm'>Password does not match!</p>
         )}
 
         <button
-          className="auth-submit"
-          type="submit"
+          className='auth-submit'
+          type='submit'
           disabled={!passwordsMatch}
         >
           Sign Up
         </button>
         <button
-          className="auth-switch"
+          className='auth-switch'
           onClick={() => {
             setLoggingIn(true);
           }}

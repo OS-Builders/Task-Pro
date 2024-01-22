@@ -4,6 +4,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.ts";
+import boardsRouter from "./routes/boardsRouter.ts";
 
 // start the DB
 const mongoUri = process.env.MONGO_URI;
@@ -28,6 +29,7 @@ app.use(express.static(join(__dirname, "../dist")));
 
 // route handlers
 app.use("/user", userRouter);
+app.use("/boards", boardsRouter);
 
 // serve the built index.html
 app.use("/", (_req: Request, res: Response) => {

@@ -1,30 +1,75 @@
-import { DashboardProps } from "../types";
-import { useEffect, useState } from "react";
+import { ContainerProps, BoardListItemState } from '../types';
+import { useEffect, useState } from 'react';
+import CreateBoardModal from '../components/CreateBoardModal';
+import '../scss/leftContainer.scss';
 
-const LeftContainer = ({ username }: DashboardProps) => {
-  //creating boardsState
-  const [boardList, setBoardList] = useState([]);
-  // make a request for all board naames
-  const fetchBoardList = async () => {
-    const reponse: Response = await fetch(`/api/${username}`);
-    const list = await reponse.json();
-    setBoardList(list);
-    console.log(boardList);
+const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
+  // creating state to open board creating modal
+  const [creatingBoard, setCreatingBoard] = useState<boolean>(false);
+  // creating state to store the list of board names
+  const [boardList, setBoardList] = useState<BoardListItemState[]>([]);
+  //state for selected board
+  const [selectedBoard, setSelectedBoard] = useState<string | null>(null);
+  // make a request for all board naames, return an array containing strings of the board names
+  useEffect(() => {
+    const fetchBoardList = async () => {
+      const reponse: Response = await fetch(`/boards/${user.id}`);
+      const list = await reponse.json();
+      setBoardList(list);
+    };
+    fetchBoardList().catch(console.error);
+  }, []);
+
+  // function for changing board when click selection button
+  const handleBoardSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setCurrentBoard({
+      name: e.currentTarget.name,
+      id: e.currentTarget.id,
+    });
+    setSelectedBoard(e.currentTarget.id);
   };
-  fetchBoardList().catch(console.error);
+
+  // function for creating a new board
+  const handleCreateBoard = () => {
+    // create a pop up to create the new board
+    setCreatingBoard(true);
+  };
 
   // iterate through board names push buttons or components into array boardlist in state
-  const boardSelectors = [];
-  for (let i = 0; i < boardList.length; i++) {
-    boardSelectors.push(<BoardSelector name={boardList[i]} />);
-  }
+  const boardSelectors = boardList.map((board, index) => (
+    <button
+      className={`board-selector ${
+        selectedBoard === board.id ? 'selected' : ''
+      }`}
+      onClick={handleBoardSelect}
+      name={board.name}
+      id={board.id}
+      key={index}
+    >
+      {board.name}
+    </button>
+  ));
 
   return (
-    <div className="left-container">
-      <h2>Hello {username}</h2>
-      <h1>My Boards</h1>
-      <button>Create New Board +</button>
-      <div>{boardSelectors}</div>
+    <div className='left-container'>
+      <h1 className='heading'>Hello, {user.name}</h1>
+      <button className='new-board-btn' onClick={handleCreateBoard}>
+        Create New Board +
+      </button>
+      <div className='boards-info'>
+        <div className='board-selectors'>{boardSelectors}</div>
+      </div>
+      {creatingBoard ? (
+        <CreateBoardModal
+          setCreatingBoard={setCreatingBoard}
+          setCurrentBoard={setCurrentBoard}
+          user={user}
+        />
+      ) : null}
+      <footer>
+        <button className='setting-button'>Setting</button>
+      </footer>
     </div>
   );
 };

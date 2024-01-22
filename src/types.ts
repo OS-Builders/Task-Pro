@@ -1,19 +1,46 @@
 export type SignupProps = {
   setLoggingIn: React.Dispatch<React.SetStateAction<boolean>>;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setUser: React.Dispatch<React.SetStateAction<UserState>>;
 };
 
 export type AuthProps = {
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setUser: React.Dispatch<React.SetStateAction<UserState>>;
 };
 
 export type DashboardProps = {
-  username: string;
+  user: UserState;
 };
+
+export type ContainerProps = {
+  user: UserState;
+  currentBoard?: CurrentBoardState;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+};
+
+export type CreateBoardModalProps = {
+  setCreatingBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  user: UserState;
+};
+
+export interface UserState {
+  name: string;
+  id: string;
+}
 
 export interface FormState {
   username: string;
   email?: string;
   password: string;
   confirmPassword?: string;
+}
+
+export interface CurrentBoardState {
+  name: string;
+  id: string;
+}
+
+export interface BoardListItemState {
+  name: string;
+  id: string;
 }
