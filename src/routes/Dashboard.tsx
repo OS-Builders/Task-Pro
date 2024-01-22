@@ -11,11 +11,10 @@ const Dashboard = ({ user }: DashboardProps) => {
     id: '',
   });
   //state confirmDelete false
-  console.log('User in dash board', user);
   return (
     <div className='main-page'>
       <LeftContainer user={user} setCurrentBoard={setCurrentBoard} />
-      <MainContainer />
+      <MainContainer currentBoard={currentBoard}/>
     </div>
   );
 };

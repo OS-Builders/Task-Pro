@@ -58,7 +58,6 @@ const boardsController = {
   },
   createBoard: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log('req.body', req.body.boardName);
       const createdBoard = await Board.create({
         name: req.body.boardName,
         backlog: [],
@@ -91,6 +90,29 @@ const boardsController = {
         log: `boardssController.assignNewBoard ERROR: ${err}`,
         status: 500,
         message: { err: 'Error assigning board to user' },
+      });
+    }
+  },
+  getCurrentBoard: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // find all boards beloning to the user, push board names into an array and save on locals
+      const board = await User.findOne({ _id: req.params.boardID });
+      console.log(board);
+      if (!board) {
+        return next({
+          log: `boardsController.getCurrentBoard ERROR: Board cannot be found.`,
+          status: 500,
+          message: { err: 'Cannot find board.' },
+        });
+      }
+      res.locals.boardInfo = board;
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `boardssController.getCurrentBoard ERROR: ${err}`,
+        status: 500,
+        message: { err: 'Error getting current board' },
       });
     }
   },

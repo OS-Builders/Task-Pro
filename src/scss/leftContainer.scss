@@ -3,17 +3,65 @@
   height: 100%;
   background-color: rgb(22, 22, 22);
   margin: 0;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center; /* Center text horizontally */
+  h1 {
+    padding: 10px;
+  }
+  footer {
+    margin-top: auto;
+    height: fit-content;
+  }
+  .settings-btn {
+    margin: 20px;
+    border: 2px solid rgb(169, 166, 166);
+    border-radius: 10px;
+    background-color: rgb(22, 22, 22);
+    color: white;
+    font-size: x-large;
+    padding: 10px;
+    &:hover {
+      background-color: rgb(54, 53, 53);
+    }
+  }
+}
+.boards-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.boardSelector {
-  align-self: center;
-  background-color: #4caf50;
-  color: #fff;
-  padding: 10px;
-  border: 1px solid black;
+.board-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: rgb(22, 22, 22);
+  padding: 15px;
+  border: 2px solid rgb(22, 22, 22);
   border-radius: 4px;
+  font-weight: bold;
+  font-size: large;
+  width: 200px;
+  margin: 10px;
+  &:hover {
+    border: 2px solid rgb(195, 255, 14);
+  }
+  &:target {
+    border: 2px solid rgb(195, 255, 14);
+  }
+}
+.new-board-btn {
+  align-self: center;
+  border: 2px solid rgb(22, 22, 22);
+  border-radius: 10px;
+  background-color: rgb(22, 22, 22);
+  color: white;
+  font-size: large;
+  padding: 10px;
+  &:hover {
+    background-color: rgb(54, 53, 53);
+  }
 }

@@ -13,7 +13,7 @@ export type DashboardProps = {
 
 export type ContainerProps = {
   user: UserState;
-  currentBoard?: string;
+  currentBoard?: CurrentBoardState;
   setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
 };
 
