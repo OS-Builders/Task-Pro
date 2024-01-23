@@ -1,4 +1,4 @@
-import { ContainerProps } from "../types";
+import { BoardListItemState, ContainerProps } from "../types";
 import { ReactNode, useEffect, useState } from "react";
 import CreateBoardModal from "../components/CreateBoardModal";
 import "../scss/leftContainer.scss";
@@ -15,7 +15,7 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
     const fetchBoardList = async () => {
       const reponse: Response = await fetch(`/boards/${user.id}`);
       const list = await reponse.json();
-      const boardSelectors = list.map((board) => (
+      const boardSelectors = list.map((board: BoardListItemState) => (
         <button
           className={`board-selector ${
             selectedBoard === board.id ? "selected" : ""
@@ -52,7 +52,8 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
 
   return (
     <div className="left-container">
-      <h1 className="heading">Hello, {user.name}</h1>
+      <h1 className="heading">Task Pro</h1>
+      <h1 className="heading">{user.name}'s Boards</h1>
       <button className="new-board-btn" onClick={handleCreateBoard}>
         Create New Board +
       </button>
