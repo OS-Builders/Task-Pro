@@ -14,7 +14,7 @@
     margin-top: auto;
     height: 60px;
   }
-  .setting-button {
+  .settings-button {
     border: none;
     background-color: rgb(22, 22, 22);
     color: white;
@@ -84,7 +84,7 @@
   border-radius: 5px;
 
   &:before {
-    content: '';
+    content: "";
     background: linear-gradient(
       45deg,
       #ff0000,
@@ -115,7 +115,7 @@
   // }
   &:after {
     z-index: -1;
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
