@@ -1,0 +1,14 @@
+.column-container {
+  border: 2px white solid;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding: 0px 30px;
+  .column {
+    width: 25%;
+    height: 100%;
+    border: 2px white solid;
+    background-color: blue;
+  }
+}

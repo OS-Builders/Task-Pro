@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import "../scss/mainContainer.scss";
 import { ContainerProps } from "../types";
+import ColumnContainer from "./ColumnContainer.tsx";
 
 const MainContainer = ({ currentBoard }: ContainerProps) => {
   // const [view, setView] = useState();
   useEffect(() => {
     const fetchBoard = async () => {
-      const reponse: Response = await fetch(`/boards/${currentBoard.id}`);
-      const board = await reponse.json();
-      console.log(board);
+      if (currentBoard && currentBoard.name !== "") {
+        const reponse: Response = await fetch(`/boards/${currentBoard.id}`);
+        const board = await reponse.json();
+        console.log(board);
+      }
     };
     fetchBoard().catch(console.error);
-  }, []);
+  }, [currentBoard]);
 
   if (!currentBoard?.name) {
     return (
@@ -25,8 +28,8 @@ const MainContainer = ({ currentBoard }: ContainerProps) => {
 
   return (
     <div className="main-container">
-      <h1>{currentBoard.name}</h1>
-      <div className="task-container"></div>
+      <h1 className="board-title">{currentBoard.name}</h1>
+      <ColumnContainer />
     </div>
   );
 };
