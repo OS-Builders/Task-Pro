@@ -20,7 +20,11 @@ export type ContainerProps = {
 export type CreateBoardModalProps = {
   setCreatingBoard: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  boardList: React.ReactNode[];
+  setBoardList: React.Dispatch<React.SetStateAction<React.ReactNode[]>>;
   user: UserState;
+  handleBoardSelect: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedBoard: string | null;
 };
 
 export interface UserState {
