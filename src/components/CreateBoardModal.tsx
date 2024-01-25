@@ -33,7 +33,7 @@ const CreateBoardModal = ({
       },
       body: JSON.stringify(body),
     });
-    // receive usernam and id from backend
+    // receive username and id from backend
     // if request success, save username to state and route to dashboard
     if (response.status === 200) {
       const responseData = await response.json();

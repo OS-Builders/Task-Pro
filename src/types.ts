@@ -1,3 +1,4 @@
+// PROP TYPES
 export type SignupProps = {
   setLoggingIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<UserState>>;
@@ -27,6 +28,12 @@ export type CreateBoardModalProps = {
   selectedBoard: string | null;
 };
 
+export type ColumnProps = {
+  name: string;
+  create: boolean;
+};
+
+// STATE TYPES
 export interface UserState {
   name: string;
   id: string;
