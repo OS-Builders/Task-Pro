@@ -1,15 +1,15 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 
 const router = express.Router();
 
 // import controllers
-import boardsController from '../controllers/boardsController.ts';
+import boardsController from "../controllers/boardsController.ts";
 
 // define routes
 
 // route for getting board names
 router.get(
-  '/:userId',
+  "/myboards/:userId",
   boardsController.getMyBoards,
   boardsController.getBoardNamesAndIds,
   (_req: Request, res: Response) => {
@@ -18,15 +18,15 @@ router.get(
 );
 
 router.get(
-  '/:boardID',
+  "/board",
   boardsController.getCurrentBoard,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.boardInfo);
+    return res.status(200).json(res.locals.board);
   }
 );
 
 router.post(
-  '/create',
+  "/create",
   boardsController.createBoard,
   boardsController.assignNewBoard,
   (_req: Request, res: Response) => {

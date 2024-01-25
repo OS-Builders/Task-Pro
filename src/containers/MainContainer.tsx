@@ -3,12 +3,14 @@ import "../scss/mainContainer.scss";
 import { ContainerProps } from "../types";
 import ColumnContainer from "./ColumnContainer.tsx";
 
-const MainContainer = ({ currentBoard }: ContainerProps) => {
+const MainContainer = ({ user, currentBoard }: ContainerProps) => {
   // const [view, setView] = useState();
   useEffect(() => {
     const fetchBoard = async () => {
       if (currentBoard && currentBoard.name !== "") {
-        const reponse: Response = await fetch(`/boards/${currentBoard.id}`);
+        const reponse: Response = await fetch(
+          `/boards/board?board=${currentBoard.id}&user=${user.id}`
+        );
         const board = await reponse.json();
         console.log(board);
       }

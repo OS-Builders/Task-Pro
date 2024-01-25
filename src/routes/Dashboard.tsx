@@ -1,20 +1,20 @@
-import LeftContainer from '../containers/LeftContainer';
-import MainContainer from '../containers/MainContainer';
-import { DashboardProps, CurrentBoardState } from '../types';
-import { useState } from 'react';
-import '../scss/dashBoard.scss';
+import LeftContainer from "../containers/LeftContainer";
+import MainContainer from "../containers/MainContainer";
+import { DashboardProps, CurrentBoardState } from "../types";
+import { useState } from "react";
+import "../scss/dashBoard.scss";
 
 const Dashboard = ({ user }: DashboardProps) => {
   // state of current board selected
   const [currentBoard, setCurrentBoard] = useState<CurrentBoardState>({
-    name: '',
-    id: '',
+    name: "",
+    id: "",
   });
   //state confirmDelete false
   return (
-    <div className='main-page'>
+    <div className="main-page">
       <LeftContainer user={user} setCurrentBoard={setCurrentBoard} />
-      <MainContainer currentBoard={currentBoard}/>
+      <MainContainer user={user} currentBoard={currentBoard} />
     </div>
   );
 };

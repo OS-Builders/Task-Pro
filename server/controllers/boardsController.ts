@@ -95,9 +95,21 @@ const boardsController = {
   },
   getCurrentBoard: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // find all boards belonging to the user, push board names into an array and save on locals
-      const board = await User.findOne({ _id: req.params.boardID });
-      console.log(board);
+      // obtain the user document
+      const user = await User.findOne({ _id: req.query.user }).populate(
+        "boards"
+      );
+      if (!user) {
+        return next({
+          log: `boardsController.getCurrentBoard ERROR: User cannot be found.`,
+          status: 500,
+          message: { err: "Cannot find board." },
+        });
+      }
+      // Find the board by ID
+      const board = user.boards.find(
+        (boardObj) => boardObj._id.toString() === req.query.board
+      );
       if (!board) {
         return next({
           log: `boardsController.getCurrentBoard ERROR: Board cannot be found.`,
@@ -105,7 +117,8 @@ const boardsController = {
           message: { err: "Cannot find board." },
         });
       }
-      res.locals.boardInfo = board;
+      console.log("board: ", board);
+      res.locals.board = board;
       return next();
     } catch (err) {
       // pass error through to global error handler
