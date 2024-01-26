@@ -21,7 +21,7 @@ const Column = ({ name, create }: ColumnProps) => {
           </button>
         )}
       </div>
-      {addingTask ? <NewTaskModal /> : null}
+      {addingTask ? <NewTaskModal setAddingTask={setAddingTask} /> : null}
     </div>
   );
 };

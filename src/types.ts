@@ -28,6 +28,10 @@ export type CreateBoardModalProps = {
   selectedBoard: string | null;
 };
 
+export type NewTaskModalProps = {
+  setAddingTask: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export type ColumnProps = {
   name: string;
   create: boolean;
@@ -39,7 +43,7 @@ export interface UserState {
   id: string;
 }
 
-export interface FormState {
+export interface AuthFormState {
   username: string;
   email?: string;
   password: string;
@@ -54,4 +58,10 @@ export interface CurrentBoardState {
 export interface BoardListItemState {
   name: string;
   id: string;
+}
+
+export interface TaskFormState {
+  taskname: string;
+  status: string;
+  notes: string;
 }
