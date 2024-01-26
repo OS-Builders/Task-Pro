@@ -6,12 +6,13 @@ import "../scss/modal.scss";
 const NewTaskModal = ({ setAddingTask }: NewTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
     taskname: "",
-    status: "",
-    notes: "",
+    status: "Backlog",
+    tasknotes: "",
   });
 
   const handleFormSubmit = () => {
     console.log("New Task Form Submitted: ", formData);
+    setAddingTask(false);
   };
 
   const handleInputChange = (
@@ -39,13 +40,21 @@ const NewTaskModal = ({ setAddingTask }: NewTaskModalProps) => {
           />
           <label htmlFor="modal-radio">Task Status: </label>
           <div className="modal-radio">
-            <input type="radio" name="status" id="backlog" value={"Backlog"} />
+            <input
+              type="radio"
+              name="status"
+              id="backlog"
+              value={"Backlog"}
+              onChange={handleInputChange}
+              defaultChecked
+            />
             <label htmlFor="backlog">Backlog</label>
             <input
               type="radio"
               name="status"
               id="in-progress"
               value={"In Progress"}
+              onChange={handleInputChange}
             />
             <label htmlFor="in-progress">In Progress</label>
             <input
@@ -53,6 +62,7 @@ const NewTaskModal = ({ setAddingTask }: NewTaskModalProps) => {
               name="status"
               id="in-review"
               value={"In Review"}
+              onChange={handleInputChange}
             />
             <label htmlFor="in-review">In Review</label>
             <input
@@ -60,6 +70,7 @@ const NewTaskModal = ({ setAddingTask }: NewTaskModalProps) => {
               name="status"
               id="completed"
               value={"Completed"}
+              onChange={handleInputChange}
             />
             <label htmlFor="completed">Completed</label>
           </div>

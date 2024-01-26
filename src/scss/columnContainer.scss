@@ -1,14 +1,21 @@
 .column-container {
-  border: 2px white solid;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding: 0px 30px;
+  width: 100%;
+
   .column {
     width: 25%;
     height: 100%;
-    border: 2px white solid;
-    background-color: blue;
+    background-color: rgb(70, 70, 70);
+    margin: 0px 10px;
+    border-radius: 15px;
+
+    .new-task-btn {
+      width: 90%;
+      padding: 10px;
+      cursor: pointer;
+    }
   }
 }

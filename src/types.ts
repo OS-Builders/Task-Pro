@@ -63,5 +63,5 @@ export interface BoardListItemState {
 export interface TaskFormState {
   taskname: string;
   status: string;
-  notes: string;
+  tasknotes: string;
 }
