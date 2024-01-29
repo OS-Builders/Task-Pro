@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "../scss/mainContainer.scss";
-import { ContainerProps } from "../types";
+import { MainContainerProps } from "../types";
 import ColumnContainer from "./ColumnContainer.tsx";
 
-const MainContainer = ({ user, currentBoard }: ContainerProps) => {
+const MainContainer = ({ user, currentBoard }: MainContainerProps) => {
   // const [view, setView] = useState();
   useEffect(() => {
     const fetchBoard = async () => {
@@ -31,7 +31,7 @@ const MainContainer = ({ user, currentBoard }: ContainerProps) => {
   return (
     <div className="main-container">
       <h1 className="board-title">{currentBoard.name}</h1>
-      <ColumnContainer />
+      <ColumnContainer user={user} currentBoard={currentBoard} />
     </div>
   );
 };

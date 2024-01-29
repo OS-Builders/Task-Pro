@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ColumnProps } from "../types";
 import NewTaskModal from "./NewTaskModal";
 
-const Column = ({ name, create }: ColumnProps) => {
+const Column = ({ name, create, user, currentBoard }: ColumnProps) => {
   // state for rendering new task modal
   const [addingTask, setAddingTask] = useState(false);
 
@@ -21,7 +21,13 @@ const Column = ({ name, create }: ColumnProps) => {
           </button>
         )}
       </div>
-      {addingTask ? <NewTaskModal setAddingTask={setAddingTask} /> : null}
+      {addingTask ? (
+        <NewTaskModal
+          setAddingTask={setAddingTask}
+          user={user}
+          currentBoard={currentBoard}
+        />
+      ) : null}
     </div>
   );
 };

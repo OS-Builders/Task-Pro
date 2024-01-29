@@ -3,15 +3,37 @@ import { NewTaskModalProps, TaskFormState } from "../types";
 import { useState } from "react";
 import "../scss/modal.scss";
 
-const NewTaskModal = ({ setAddingTask }: NewTaskModalProps) => {
+const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
     taskname: "",
     status: "Backlog",
     tasknotes: "",
   });
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault;
     console.log("New Task Form Submitted: ", formData);
+    // send POST request with the new task card, user and current board
+    const fetchAddTask = async () => {
+      if (currentBoard && currentBoard.name !== "") {
+        const body = {
+          ...formData,
+          boardId: currentBoard.id,
+        };
+        console.log("body: ", body);
+        const reponse: Response = await fetch(`/tasks/create`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify(body),
+        });
+        const task = await reponse.json();
+        console.log(task);
+      }
+    };
+    fetchAddTask().catch(console.error);
+    // on successful POST, add card to state
     setAddingTask(false);
   };
 

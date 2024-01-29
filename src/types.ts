@@ -12,10 +12,14 @@ export type DashboardProps = {
   user: UserState;
 };
 
-export type ContainerProps = {
+export type LeftContainerProps = {
   user: UserState;
-  currentBoard?: CurrentBoardState;
   setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+};
+
+export type MainContainerProps = {
+  user: UserState;
+  currentBoard: CurrentBoardState;
 };
 
 export type CreateBoardModalProps = {
@@ -30,11 +34,19 @@ export type CreateBoardModalProps = {
 
 export type NewTaskModalProps = {
   setAddingTask: React.Dispatch<React.SetStateAction<boolean>>;
+  currentBoard: CurrentBoardState;
 };
 
 export type ColumnProps = {
   name: string;
   create: boolean;
+  user: UserState;
+  currentBoard: CurrentBoardState;
+};
+
+export type ColumnContainerProps = {
+  user: UserState;
+  currentBoard: CurrentBoardState;
 };
 
 // STATE TYPES

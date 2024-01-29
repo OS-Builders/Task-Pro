@@ -1,9 +1,9 @@
-import { BoardListItemState, ContainerProps } from "../types";
+import { BoardListItemState, LeftContainerProps } from "../types";
 import { ReactNode, useEffect, useState } from "react";
 import CreateBoardModal from "../components/CreateBoardModal";
 import "../scss/leftContainer.scss";
 
-const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
+const LeftContainer = ({ user, setCurrentBoard }: LeftContainerProps) => {
   // creating state to open board creating modal
   const [creatingBoard, setCreatingBoard] = useState<boolean>(false);
   // creating state to store the list of board names
