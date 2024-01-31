@@ -53,6 +53,9 @@ export type ColumnContainerProps = {
   setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
 };
 
+export type CardProps = {
+  info: TaskState;
+};
 // STATE TYPES
 export interface UserState {
   name: string;

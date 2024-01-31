@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { ColumnProps } from "../types";
+import { useEffect, useState, ReactNode } from "react";
+import { ColumnProps, TaskState } from "../types";
 import NewTaskModal from "./NewTaskModal";
+import Card from "./Card.tsx";
 
 const Column = ({
   name,
@@ -10,12 +11,13 @@ const Column = ({
   boardState,
 }: ColumnProps) => {
   // state for rendering new task modal
-  const [addingTask, setAddingTask] = useState(false);
+  const [addingTask, setAddingTask] = useState<boolean>(false);
 
   // state for number of tasks in a column
-  const [numTasks, setNumTasks] = useState(0);
+  const [numTasks, setNumTasks] = useState<number>(0);
 
   // state for storing task card components
+  const [taskCards, setTaskCards] = useState<ReactNode[]>([]);
 
   // render new task modal on button click
   const handleNewTask = () => {
@@ -28,7 +30,10 @@ const Column = ({
     console.log("Column column: ", column);
     setNumTasks(column.length);
     // map column to an array of task card components and then set as the state
-    column.map((task) => {});
+    const cardsArray = column.map((task: TaskState) => {
+      return <Card info={task} key={task._id} />;
+    });
+    setTaskCards(cardsArray);
   }, [boardState]);
 
   //effect for updating state as boardState changes, only update if need by comparing numTasks to column.length
@@ -50,6 +55,7 @@ const Column = ({
             Add New Task +
           </button>
         )}
+        {taskCards}
       </div>
       {addingTask ? (
         <NewTaskModal
