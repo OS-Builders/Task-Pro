@@ -5,14 +5,12 @@ import { NextFunction, Request, Response } from "express";
 const tasksController = {
   createTask: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("entering createTask");
       const createdTask = await Card.create({
         name: req.body.taskname,
         status: req.body.status,
         notes: req.body.tasknotes,
       });
       res.locals.createdTask = createdTask;
-      console.log("createdTask is:", createdTask);
 
       return next();
     } catch (err) {
@@ -26,11 +24,6 @@ const tasksController = {
   },
   assignTask: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(
-        "entering assignTasks, createdTask is: ",
-        res.locals.createdTask
-      );
-      console.log("req.body----", req.body);
       const column = req.body.status;
 
       let updateQuery;
@@ -50,7 +43,6 @@ const tasksController = {
         };
       }
       await Board.updateOne({ _id: req.body.boardId }, updateQuery);
-      console.log("Task created: ", res.locals.createdTask);
       return next();
     } catch (err) {
       // pass error through to global error handler
@@ -58,6 +50,23 @@ const tasksController = {
         log: `tasksController.assignTask ERROR: ${err}`,
         status: 500,
         message: { err: "Error assigning task into board" },
+      });
+    }
+  },
+  getTasks: async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      // populate the tasks
+      res.locals.board = await res.locals.board.populate("backlog");
+      res.locals.board = await res.locals.board.populate("inProgress");
+      res.locals.board = await res.locals.board.populate("inReview");
+      res.locals.board = await res.locals.board.populate("completed");
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.getTasks ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error getting Tasks" },
       });
     }
   },

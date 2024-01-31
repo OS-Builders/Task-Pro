@@ -1,19 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColumnProps } from "../types";
 import NewTaskModal from "./NewTaskModal";
 
-const Column = ({ name, create, user, currentBoard }: ColumnProps) => {
+const Column = ({
+  name,
+  create,
+  user,
+  currentBoard,
+  boardState,
+}: ColumnProps) => {
   // state for rendering new task modal
   const [addingTask, setAddingTask] = useState(false);
+
+  // state for number of tasks in a column
+  const [numTasks, setNumTasks] = useState(0);
+
+  // state for storing task card components
 
   // render new task modal on button click
   const handleNewTask = () => {
     setAddingTask(true);
   };
 
+  //effect for rendering cards based on intial state
+  useEffect(() => {
+    const column = boardState[name];
+    console.log("Column column: ", column);
+    setNumTasks(column.length);
+    // map column to an array of task card components and then set as the state
+    column.map((task) => {});
+  }, [boardState]);
+
+  //effect for updating state as boardState changes, only update if need by comparing numTasks to column.length
+
   return (
     <div className="column">
-      <h2 className="column-title">{name}</h2>
+      <h2 className="column-title">
+        {(name === "backlog"
+          ? "Backlog"
+          : name === "inProgress"
+          ? "In Progress"
+          : name === "inReview"
+          ? "In Review"
+          : "Completed") + ` (${numTasks})`}
+      </h2>
       <div className="cards-container">
         {create && (
           <button className="new-task-btn" onClick={handleNewTask}>

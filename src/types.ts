@@ -35,6 +35,7 @@ export type CreateBoardModalProps = {
 export type NewTaskModalProps = {
   setAddingTask: React.Dispatch<React.SetStateAction<boolean>>;
   currentBoard: CurrentBoardState;
+  user: UserState;
 };
 
 export type ColumnProps = {
@@ -42,11 +43,14 @@ export type ColumnProps = {
   create: boolean;
   user: UserState;
   currentBoard: CurrentBoardState;
+  boardState: BoardState;
 };
 
 export type ColumnContainerProps = {
   user: UserState;
   currentBoard: CurrentBoardState;
+  boardState: BoardState;
+  setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
 };
 
 // STATE TYPES
@@ -76,4 +80,19 @@ export interface TaskFormState {
   taskname: string;
   status: string;
   tasknotes: string;
+}
+
+export interface BoardState {
+  backlog: TaskState[];
+  inProgress: TaskState[];
+  inReview: TaskState[];
+  completed: TaskState[];
+}
+
+export interface TaskState {
+  name: string;
+  notes: string;
+  status: string;
+  __v: number;
+  _id: string;
 }

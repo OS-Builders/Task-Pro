@@ -4,6 +4,7 @@ const router = express.Router();
 
 // import controllers
 import boardsController from "../controllers/boardsController.ts";
+import tasksController from "../controllers/tasksController.ts";
 
 // define routes
 
@@ -20,6 +21,7 @@ router.get(
 router.get(
   "/board",
   boardsController.getCurrentBoard,
+  tasksController.getTasks,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.board);
   }

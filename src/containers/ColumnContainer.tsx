@@ -1,20 +1,15 @@
-import { useState, useEffect } from "react";
 import Column from "../components/Column";
 import "../scss/columnContainer.scss";
 import { ColumnContainerProps } from "../types";
 
-const ColumnContainer = ({ user, currentBoard }: ColumnContainerProps) => {
-  const [backlog, setBacklog] = useState([]);
-  const [inProgress, setInProgress] = useState([]);
-  const [inReview, setInReview] = useState([]);
-  const [completed, setCompleted] = useState([]);
-
-  useEffect(() => {
-    //fetching
-  }, [currentBoard]);
-
+const ColumnContainer = ({
+  user,
+  currentBoard,
+  boardState,
+  setBoardState,
+}: ColumnContainerProps) => {
   const columns = [];
-  const columnNames = ["Backlog", "In Progress", "In Review", "Completed"];
+  const columnNames = ["backlog", "inProgress", "inReview", "completed"];
   for (let i = 0; i < 4; i++) {
     columns.push(
       <Column
@@ -23,6 +18,7 @@ const ColumnContainer = ({ user, currentBoard }: ColumnContainerProps) => {
         create={i === 0 ? true : false}
         user={user}
         currentBoard={currentBoard}
+        boardState={boardState}
       />
     );
   }
