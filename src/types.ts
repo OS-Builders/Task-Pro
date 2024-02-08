@@ -37,12 +37,11 @@ export type NewTaskModalProps = {
   currentBoard: CurrentBoardState;
   user: UserState;
   setTaskCards: React.Dispatch<React.SetStateAction<React.ReactNode[]>>;
-  taskCards: React.ReactNode[];
   setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
 };
 
 export type ColumnProps = {
-  name: string;
+  name: keyof BoardState;
   create: boolean;
   user: UserState;
   currentBoard: CurrentBoardState;
@@ -99,7 +98,18 @@ export interface BoardState {
 export interface TaskState {
   name: string;
   notes: string;
-  status: string;
+  status: "backlog" | "inProgress" | "inReview" | "completed";
   __v: number;
   _id: string;
 }
+
+// TYPES
+export type BoardType = {
+  name: string;
+  backlog: TaskState[];
+  inProgress: TaskState[];
+  inReview: TaskState[];
+  completed: TaskState[];
+  __v: number;
+  _id: string;
+};

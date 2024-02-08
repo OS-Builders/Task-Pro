@@ -35,7 +35,7 @@ const Column = ({
       return <Card info={task} key={task._id} />;
     });
     setTaskCards(cardsArray);
-  }, [boardState]);
+  }, [boardState, name]);
 
   //effect for updating state as boardState changes, only update if need by comparing numTasks to column.length
 
@@ -64,7 +64,6 @@ const Column = ({
           user={user}
           currentBoard={currentBoard}
           setTaskCards={setTaskCards}
-          taskCards={taskCards}
           setBoardState={setBoardState}
         />
       ) : null}

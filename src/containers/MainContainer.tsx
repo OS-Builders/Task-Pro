@@ -23,6 +23,7 @@ const MainContainer = ({ user, currentBoard }: MainContainerProps) => {
         const board = await reponse.json();
         // update state with the fetched data
         console.log("MainContainer board: ", board);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { boardOwner, name, _id, __v, ...columns } = board;
         await setBoardState({ ...columns });
       }

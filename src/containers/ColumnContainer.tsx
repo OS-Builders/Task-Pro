@@ -1,6 +1,6 @@
 import Column from "../components/Column";
 import "../scss/columnContainer.scss";
-import { ColumnContainerProps } from "../types";
+import { ColumnContainerProps, BoardState } from "../types";
 
 const ColumnContainer = ({
   user,
@@ -9,7 +9,12 @@ const ColumnContainer = ({
   setBoardState,
 }: ColumnContainerProps) => {
   const columns = [];
-  const columnNames = ["backlog", "inProgress", "inReview", "completed"];
+  const columnNames: Array<keyof BoardState> = [
+    "backlog",
+    "inProgress",
+    "inReview",
+    "completed",
+  ];
   for (let i = 0; i < 4; i++) {
     columns.push(
       <Column

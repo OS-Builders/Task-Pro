@@ -1,7 +1,7 @@
 import User from "../models/userModel.ts";
 import Board from "../models/boardModel.ts";
 import { NextFunction, Request, Response } from "express";
-import { BoardListItemState } from "../../src/types.ts";
+import { BoardListItemState, BoardType } from "../../src/types.ts";
 
 const boardsController = {
   getMyBoards: async (req: Request, res: Response, next: NextFunction) => {
@@ -35,7 +35,7 @@ const boardsController = {
   ) => {
     try {
       const namesAndIds: BoardListItemState[] = [];
-      res.locals.boards.forEach((board: any) => {
+      res.locals.boards.forEach((board: BoardType) => {
         namesAndIds.push({
           name: board.name,
           id: board._id,

@@ -1,14 +1,16 @@
 import { createPortal } from "react-dom";
-import { NewTaskModalProps, TaskFormState } from "../types";
+import {
+  BoardState,
+  NewTaskModalProps,
+  TaskFormState,
+  TaskState,
+} from "../types";
 import { useState } from "react";
-import Card from "./Card";
 import "../scss/modal.scss";
 
 const NewTaskModal = ({
   setAddingTask,
   currentBoard,
-  setTaskCards,
-  taskCards,
   setBoardState,
 }: NewTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
@@ -34,10 +36,10 @@ const NewTaskModal = ({
           },
           body: JSON.stringify(body),
         });
-        const task = await response.json();
+        const task: TaskState = await response.json();
         if (response.status === 200) {
           console.log("newly created task: ", task);
-          setBoardState((prevState) => ({
+          setBoardState((prevState: BoardState) => ({
             ...prevState,
             [task.status]: [...prevState[task.status], task],
           }));
