@@ -1,9 +1,16 @@
 import { createPortal } from "react-dom";
 import { NewTaskModalProps, TaskFormState } from "../types";
 import { useState } from "react";
+import Card from "./Card";
 import "../scss/modal.scss";
 
-const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
+const NewTaskModal = ({
+  setAddingTask,
+  currentBoard,
+  setTaskCards,
+  taskCards,
+  setBoardState,
+}: NewTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
     taskname: "",
     status: "Backlog",
@@ -20,20 +27,24 @@ const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
           ...formData,
           boardId: currentBoard.id,
         };
-        console.log("body: ", body);
-        const reponse: Response = await fetch(`/tasks/create`, {
+        const response: Response = await fetch(`/tasks/create`, {
           method: "POST",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
           },
           body: JSON.stringify(body),
         });
-        const task = await reponse.json();
-        console.log(task);
+        const task = await response.json();
+        if (response.status === 200) {
+          console.log("newly created task: ", task);
+          setBoardState((prevState) => ({
+            ...prevState,
+            [task.status]: [...prevState[task.status], task],
+          }));
+        }
       }
     };
     fetchAddTask().catch(console.error);
-    // on successful POST, add card to state
     setAddingTask(false);
   };
 
@@ -66,7 +77,7 @@ const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
               type="radio"
               name="status"
               id="backlog"
-              value={"Backlog"}
+              value={"backlog"}
               onChange={handleInputChange}
               defaultChecked
             />
@@ -75,7 +86,7 @@ const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
               type="radio"
               name="status"
               id="in-progress"
-              value={"In Progress"}
+              value={"inProgress"}
               onChange={handleInputChange}
             />
             <label htmlFor="in-progress">In Progress</label>
@@ -83,7 +94,7 @@ const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
               type="radio"
               name="status"
               id="in-review"
-              value={"In Review"}
+              value={"inReview"}
               onChange={handleInputChange}
             />
             <label htmlFor="in-review">In Review</label>
@@ -91,7 +102,7 @@ const NewTaskModal = ({ setAddingTask, currentBoard }: NewTaskModalProps) => {
               type="radio"
               name="status"
               id="completed"
-              value={"Completed"}
+              value={"completed"}
               onChange={handleInputChange}
             />
             <label htmlFor="completed">Completed</label>

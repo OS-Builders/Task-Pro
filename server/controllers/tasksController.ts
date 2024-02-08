@@ -25,21 +25,20 @@ const tasksController = {
   assignTask: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const column = req.body.status;
-
       let updateQuery;
-      if (column === "Backlog") {
+      if (column === "backlog") {
         updateQuery = { $push: { backlog: res.locals.createdTask._id } };
-      } else if (column === "In Progress") {
+      } else if (column === "inProgress") {
         updateQuery = {
           $push: { inProgress: res.locals.createdTask._id },
         };
-      } else if (column === "In Review") {
+      } else if (column === "inReview") {
         updateQuery = {
           $push: { inReview: res.locals.createdTask._id },
         };
       } else {
         updateQuery = {
-          $push: { Completed: res.locals.createdTask._id },
+          $push: { completed: res.locals.createdTask._id },
         };
       }
       await Board.updateOne({ _id: req.body.boardId }, updateQuery);

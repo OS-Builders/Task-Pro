@@ -19,6 +19,7 @@ const ColumnContainer = ({
         user={user}
         currentBoard={currentBoard}
         boardState={boardState}
+        setBoardState={setBoardState}
       />
     );
   }

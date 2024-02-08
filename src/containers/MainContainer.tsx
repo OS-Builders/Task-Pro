@@ -4,7 +4,7 @@ import { BoardState, MainContainerProps } from "../types";
 import ColumnContainer from "./ColumnContainer.tsx";
 
 const MainContainer = ({ user, currentBoard }: MainContainerProps) => {
-  // set the board state as empty arrays, will be populated with board ids after fetch
+  // set the board state as empty arrays, will be populated with card ids after fetch
   const [boardState, setBoardState] = useState<BoardState>({
     backlog: [],
     inProgress: [],

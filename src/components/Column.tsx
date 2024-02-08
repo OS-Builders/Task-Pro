@@ -9,6 +9,7 @@ const Column = ({
   user,
   currentBoard,
   boardState,
+  setBoardState,
 }: ColumnProps) => {
   // state for rendering new task modal
   const [addingTask, setAddingTask] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const Column = ({
     setAddingTask(true);
   };
 
-  //effect for rendering cards based on intial state
+  //effect for rendering cards
   useEffect(() => {
     const column = boardState[name];
     console.log("Column column: ", column);
@@ -62,6 +63,9 @@ const Column = ({
           setAddingTask={setAddingTask}
           user={user}
           currentBoard={currentBoard}
+          setTaskCards={setTaskCards}
+          taskCards={taskCards}
+          setBoardState={setBoardState}
         />
       ) : null}
     </div>
