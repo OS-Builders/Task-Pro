@@ -84,7 +84,7 @@ In the future, we plan to introduce the following features:
 
 ## Authors
 
-- Nam Ha: [Github](https://github.com/username)
+- Nam Ha: [Github](https://github.com/namos2502)
 
 - John Costello: [Github](https://github.com/johnlcos)
 
