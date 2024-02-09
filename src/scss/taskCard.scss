@@ -17,15 +17,20 @@
     margin: 0;
   }
 
-  .toggle-notes-btn {
-    cursor: pointer;
-    border: none;
-    background: none;
-    align-self: self-end;
+  .task-btns-container {
+    display: flex;
+    justify-content: space-between;
 
-    .notes-svg {
-      width: 20px;
-      height: auto;
+    .task-btn {
+      cursor: pointer;
+      border: none;
+      background: none;
+      align-self: self-end;
+
+      .task-svg {
+        width: 20px;
+        height: auto;
+      }
     }
   }
 }

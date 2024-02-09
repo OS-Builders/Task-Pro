@@ -35,9 +35,14 @@ export type CreateBoardModalProps = {
 export type NewTaskModalProps = {
   setAddingTask: React.Dispatch<React.SetStateAction<boolean>>;
   currentBoard: CurrentBoardState;
-  user: UserState;
-  setTaskCards: React.Dispatch<React.SetStateAction<React.ReactNode[]>>;
   setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
+};
+
+export type EditTaskModalProps = {
+  setEditingTask: React.Dispatch<React.SetStateAction<TaskState | null>>;
+  currentBoard: CurrentBoardState;
+  setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
+  task: TaskState;
 };
 
 export type ColumnProps = {
@@ -58,6 +63,7 @@ export type ColumnContainerProps = {
 
 export type CardProps = {
   info: TaskState;
+  setEditingTask: React.Dispatch<React.SetStateAction<TaskState | null>>;
 };
 // STATE TYPES
 export interface UserState {

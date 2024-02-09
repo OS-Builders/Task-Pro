@@ -1,22 +1,23 @@
 import { createPortal } from "react-dom";
 import {
   BoardState,
-  NewTaskModalProps,
+  EditTaskModalProps,
   TaskFormState,
   TaskState,
 } from "../types";
 import { useState } from "react";
 import "../scss/modal.scss";
 
-const NewTaskModal = ({
-  setAddingTask,
+const EditTaskModal = ({
+  setEditingTask,
   currentBoard,
   setBoardState,
-}: NewTaskModalProps) => {
+  task,
+}: EditTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
-    taskname: "",
-    status: "backlog",
-    tasknotes: "",
+    taskname: task.name,
+    status: task.status,
+    tasknotes: task.notes,
   });
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +30,7 @@ const NewTaskModal = ({
           ...formData,
           boardId: currentBoard.id,
         };
-        const response: Response = await fetch(`/tasks/create`, {
+        const response: Response = await fetch(`/tasks/edit`, {
           method: "POST",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -38,7 +39,8 @@ const NewTaskModal = ({
         });
         const task: TaskState = await response.json();
         if (response.status === 200) {
-          console.log("newly created task: ", task);
+          console.log("edited task: ", task);
+          // update the board state, removing from array if necessary
           setBoardState((prevState: BoardState) => ({
             ...prevState,
             [task.status]: [...prevState[task.status], task],
@@ -47,7 +49,7 @@ const NewTaskModal = ({
       }
     };
     fetchAddTask().catch(console.error);
-    setAddingTask(false);
+    setEditingTask(null);
   };
 
   const handleInputChange = (
@@ -69,7 +71,7 @@ const NewTaskModal = ({
             className="modal-input"
             name="taskname"
             type="text"
-            placeholder="New Task"
+            value={task.name}
             onChange={handleInputChange}
             required
           />
@@ -81,7 +83,7 @@ const NewTaskModal = ({
               id="backlog"
               value={"backlog"}
               onChange={handleInputChange}
-              defaultChecked
+              checked={task.status === "backlog"}
             />
             <label htmlFor="backlog">Backlog</label>
             <input
@@ -90,6 +92,7 @@ const NewTaskModal = ({
               id="in-progress"
               value={"inProgress"}
               onChange={handleInputChange}
+              checked={task.status === "inProgress"}
             />
             <label htmlFor="in-progress">In Progress</label>
             <input
@@ -98,6 +101,7 @@ const NewTaskModal = ({
               id="in-review"
               value={"inReview"}
               onChange={handleInputChange}
+              checked={task.status === "inReview"}
             />
             <label htmlFor="in-review">In Review</label>
             <input
@@ -106,6 +110,7 @@ const NewTaskModal = ({
               id="completed"
               value={"completed"}
               onChange={handleInputChange}
+              checked={task.status === "completed"}
             />
             <label htmlFor="completed">Completed</label>
           </div>
@@ -113,7 +118,7 @@ const NewTaskModal = ({
           <textarea
             className="modal-input text"
             name="tasknotes"
-            placeholder="Task Notes"
+            value={task.notes}
             onChange={handleInputChange}
             required
           />
@@ -124,7 +129,7 @@ const NewTaskModal = ({
             <button
               className="modal-cancel"
               onClick={() => {
-                setAddingTask(false);
+                setEditingTask(null);
               }}
             >
               Cancel
@@ -137,4 +142,4 @@ const NewTaskModal = ({
   );
 };
 
-export default NewTaskModal;
+export default EditTaskModal;

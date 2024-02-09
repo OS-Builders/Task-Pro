@@ -2,6 +2,7 @@ import { useEffect, useState, ReactNode } from "react";
 import { ColumnProps, TaskState } from "../types";
 import NewTaskModal from "./NewTaskModal";
 import Card from "./Card.tsx";
+import EditTaskModal from "./EditTaskModal.tsx";
 
 const Column = ({
   name,
@@ -20,6 +21,9 @@ const Column = ({
   // state for storing task card components
   const [taskCards, setTaskCards] = useState<ReactNode[]>([]);
 
+  // state for editing a task card
+  const [editingTask, setEditingTask] = useState<TaskState | null>(null);
+
   // render new task modal on button click
   const handleNewTask = () => {
     setAddingTask(true);
@@ -32,12 +36,17 @@ const Column = ({
     setNumTasks(column.length);
     // map column to an array of task card components and then set as the state
     const cardsArray = column.map((task: TaskState) => {
-      return <Card info={task} key={task._id} />;
+      return (
+        <Card
+          info={task}
+          editingTask={editingTask}
+          setEditingTask={setEditingTask}
+          key={task._id}
+        />
+      );
     });
     setTaskCards(cardsArray);
   }, [boardState, name]);
-
-  //effect for updating state as boardState changes, only update if need by comparing numTasks to column.length
 
   return (
     <div className="column">
@@ -61,9 +70,15 @@ const Column = ({
       {addingTask ? (
         <NewTaskModal
           setAddingTask={setAddingTask}
-          user={user}
           currentBoard={currentBoard}
-          setTaskCards={setTaskCards}
+          setBoardState={setBoardState}
+        />
+      ) : null}
+      {editingTask ? (
+        <EditTaskModal
+          setEditingTask={setEditingTask}
+          currentBoard={currentBoard}
+          task={editingTask}
           setBoardState={setBoardState}
         />
       ) : null}
