@@ -63,7 +63,7 @@ const NewTaskModal = ({
     <div className="modal-overlay">
       <div className="modal">
         <form className="modal-form" onSubmit={handleFormSubmit}>
-          <h2 className="modal-title">New Board</h2>
+          <h2 className="modal-title">New Task</h2>
           <label htmlFor="taskname">Task Name: </label>
           <input
             className="modal-input"
