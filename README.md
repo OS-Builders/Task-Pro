@@ -78,10 +78,13 @@ In the future, we plan to introduce the following features:
 
  **Step 3**. Make sure node version is 18.17.1 or older, can use nvm to install the needed version.
 
- **Step 4**. Create env file and make sure to have **PORT = 3000** and **MONGO_URI = (Mongodb connection URI)**
+ **Step 4**. Create env file and make sure to have ```PORT = 3000``` and ```MONGO_URI = (Mongodb connection URI)```
 
- **Step 5**. start the project with **npm start** or **npm run dev** (for dev mode)
+ **Step 5**. start the project with ```npm start``` or ```npm run dev``` (for dev mode)
 
 #### Authors
-- Nam
-- John
+
+- Nam Ha: [Github](https://github.com/username)
+
+- John Costello: [Github](https://github.com/johnlcos)
+
