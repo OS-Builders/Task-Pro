@@ -20,6 +20,12 @@ Task Pro is an intuitive web application crafted to streamline task and project 
 - Create new board with ease.
 - Organize your task for different stage for efficiently managing a project.
 
+![Dashboard](src/assets/Dashboard.png)
+
+
+![taskCreation](src/assets/taskCreation.png)
+
+
 
 
 ## Front End 
