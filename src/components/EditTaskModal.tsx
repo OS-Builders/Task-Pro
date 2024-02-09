@@ -22,33 +22,31 @@ const EditTaskModal = ({
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault;
-    console.log("New Task Form Submitted: ", formData);
+    console.log("Edit Task Form Submitted: ", formData);
     // send POST request with the new task card, user and current board
-    const fetchAddTask = async () => {
-      if (currentBoard && currentBoard.name !== "") {
-        const body = {
-          ...formData,
-          boardId: currentBoard.id,
-        };
-        const response: Response = await fetch(`/tasks/edit`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-          body: JSON.stringify(body),
-        });
-        const task: TaskState = await response.json();
-        if (response.status === 200) {
-          console.log("edited task: ", task);
-          // update the board state, removing from array if necessary
-          setBoardState((prevState: BoardState) => ({
-            ...prevState,
-            [task.status]: [...prevState[task.status], task],
-          }));
-        }
+    const fetchEditTask = async () => {
+      const body = {
+        ...formData,
+        taskId: task?._id,
+      };
+      const response: Response = await fetch(`/tasks/edit`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(body),
+      });
+      const task: TaskState = await response.json();
+      if (response.status === 200) {
+        console.log("edited task: ", task);
+        // update the board state, removing from array if necessary
+        setBoardState((prevState: BoardState) => ({
+          ...prevState,
+          [task.status]: [...prevState[task.status], task],
+        }));
       }
     };
-    fetchAddTask().catch(console.error);
+    fetchEditTask().catch(console.error);
     setEditingTask(null);
   };
 
@@ -65,13 +63,13 @@ const EditTaskModal = ({
     <div className="modal-overlay">
       <div className="modal">
         <form className="modal-form" onSubmit={handleFormSubmit}>
-          <h2 className="modal-title">New Task</h2>
+          <h2 className="modal-title">Edit Task</h2>
           <label htmlFor="taskname">Task Name: </label>
           <input
             className="modal-input"
             name="taskname"
             type="text"
-            value={task.name}
+            value={formData.taskname}
             onChange={handleInputChange}
             required
           />
@@ -118,13 +116,13 @@ const EditTaskModal = ({
           <textarea
             className="modal-input text"
             name="tasknotes"
-            value={task.notes}
+            value={formData.tasknotes}
             onChange={handleInputChange}
             required
           />
           <div className="modal-btns">
             <button className="modal-submit" type="submit">
-              Add Task
+              Save
             </button>
             <button
               className="modal-cancel"

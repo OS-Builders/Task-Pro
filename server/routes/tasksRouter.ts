@@ -17,4 +17,13 @@ router.post(
   }
 );
 
+// route for editing a task card
+router.post(
+  "/edit",
+  tasksController.editTask,
+  (_req: Request, res: Response) => {
+    return res.status(200).json(res.locals.editedTask);
+  }
+);
+
 export default router;

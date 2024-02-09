@@ -69,6 +69,26 @@ const tasksController = {
       });
     }
   },
+  editTask: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const taskEdits = req.body;
+      const editedTask = await Card.findByIdAndUpdate({
+        name: taskEdits.taskname,
+        status: taskEdits.status,
+        notes: taskEdits.tasknotes,
+      });
+      res.locals.editedTask = editedTask;
+
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.editTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error editing Task" },
+      });
+    }
+  },
 };
 
 export default tasksController;
