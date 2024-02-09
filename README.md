@@ -82,7 +82,7 @@ In the future, we plan to introduce the following features:
 
  **Step 5**. start the project with ```npm start``` or ```npm run dev``` (for dev mode)
 
-#### Authors
+## Authors
 
 - Nam Ha: [Github](https://github.com/username)
 
