@@ -1,0 +1,21 @@
+.column-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  .column {
+    width: 25%;
+    height: 100%;
+    background-color: rgb(70, 70, 70);
+    margin: 0px 10px;
+    border-radius: 15px;
+
+    .new-task-btn {
+      width: 90%;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+}

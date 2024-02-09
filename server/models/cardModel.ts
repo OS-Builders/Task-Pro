@@ -7,7 +7,7 @@ const cardSchema = new Schema({
   name: { type: String, required: true },
   status: { type: String, required: true },
   notes: { type: String },
-  tags: [{ type: String }],
+  // tags: [{ type: String }],
 });
 
 type Card = InferSchemaType<typeof cardSchema>;

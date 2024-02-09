@@ -7,13 +7,19 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api1": {
+      "/user": {
         target:
           `http://localhost:${process.env.PORT}` || "http://localhost:3000",
         changeOrigin: true,
         secure: false,
       },
-      "/api2": {
+      "/boards": {
+        target:
+          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/tasks": {
         target:
           `http://localhost:${process.env.PORT}` || "http://localhost:3000",
         changeOrigin: true,

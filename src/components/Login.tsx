@@ -1,40 +1,62 @@
-import { SignupProps, FormState } from "../types";
+import { SignupProps, AuthFormState } from "../types";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-const Login = ({ username, setUsername, setLoggingIn }: SignupProps) => {
-  const [formData, setFormData] = useState<FormState>({
+const Login = ({ setUser, setLoggingIn }: SignupProps) => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<AuthFormState>({
     username: "",
     password: "",
   });
+  const [loginFail, setLoginFail] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // FETCH REQUEST HERE
-    console.log("formData on login", formData);
+    // send post request to /user/login with formData in body
+    const body: string = JSON.stringify(formData);
+    const response: Response = await fetch("/user/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: body,
+    });
+    // receive username from backend
+    const user = await response.json();
+    // if request success, save username to state and route to dashboard
+    if (response.status === 200) {
+      setUser(user);
+      setLoginFail(false);
+      return navigate("/dashboard");
+    } else {
+      setLoginFail(true);
+    }
   };
 
   return (
     <div className="auth-wrapper">
       <form className="auth-form" onSubmit={handleFormSubmit}>
-        <label>Username: </label>
+        <label htmlFor="username">Username </label>
         <input
           className="auth-input"
+          id="username"
           name="username"
           type="text"
           placeholder="Username"
           value={formData.username}
           onChange={handleInputChange}
+          autoComplete="username"
           required
         />
-        <label>Password: </label>
+        <label htmlFor="password">Password </label>
         <input
           className="auth-input"
+          id="password"
           name="password"
           type="password"
           placeholder="Password"
@@ -42,18 +64,21 @@ const Login = ({ username, setUsername, setLoggingIn }: SignupProps) => {
           onChange={handleInputChange}
           required
         />
+        {loginFail ? (
+          <p className="auth-confirm">Username or password incorrect</p>
+        ) : null}
         <button className="auth-submit" type="submit">
           Login
         </button>
+        <button
+          className="auth-switch"
+          onClick={() => {
+            setLoggingIn(false);
+          }}
+        >
+          Not registered? Click here to signup!
+        </button>
       </form>
-      <button
-        className="toggle-auth"
-        onClick={() => {
-          setLoggingIn(false);
-        }}
-      >
-        Not registered? Click here to signup!
-      </button>
     </div>
   );
 };

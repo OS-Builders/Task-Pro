@@ -4,6 +4,8 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.ts";
+import boardsRouter from "./routes/boardsRouter.ts";
+import tasksRouter from "./routes/tasksRouter.ts";
 
 // start the DB
 const mongoUri = process.env.MONGO_URI;
@@ -21,12 +23,15 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // serve static files
 app.use(express.static(join(__dirname, "../dist")));
 
 // route handlers
 app.use("/user", userRouter);
+app.use("/boards", boardsRouter);
+app.use("/tasks", tasksRouter);
 
 // serve the built index.html
 app.use("/", (_req: Request, res: Response) => {
@@ -39,6 +44,7 @@ app.use("*", (_req: Request, res: Response) => {
 });
 
 // global error handling
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {
     //make sure to make type for default for global error handling

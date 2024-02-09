@@ -1,0 +1,12 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  text-align: center;
+  height: 100%;
+
+  .board-title {
+    height: 5%;
+    margin: 0;
+  }
+}
