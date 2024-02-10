@@ -1,6 +1,6 @@
 # Task Pro
 
-Task Pro is an intuitive web application crafted to streamline task and project management. It empowers users of all proficiency levels to enhance their time management and organizational abilities with its user-friendly interface. Whether you opt for private usage or collaboration, Task Pro offers a comprehensive solution for creating, organizing, and sharing projects seamlessly.
+Task Pro is an intuitive web application crafted to streamline project and task management. It empowers users of all proficiency levels to enhance their time management and organizational abilities with its user-friendly interface. Whether you opt for private usage or collaboration, Task Pro offers a comprehensive solution for creating, organizing, and sharing projects seamlessly.
 
 ## Project Frames
 ![Project Frame](src/assets/projectFrame.png)
