@@ -80,6 +80,7 @@ const Column = ({
           currentBoard={currentBoard}
           task={editingTask}
           setBoardState={setBoardState}
+          startColumn={name}
         />
       ) : null}
     </div>

@@ -13,7 +13,7 @@ router.post(
   tasksController.createTask,
   tasksController.assignTask,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.createdTask);
+    return res.status(200).json(res.locals.task);
   }
 );
 
@@ -21,8 +21,10 @@ router.post(
 router.post(
   "/edit",
   tasksController.editTask,
+  tasksController.pullTask,
+  tasksController.assignTask,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.editedTask);
+    return res.status(200).json(res.locals.task);
   }
 );
 

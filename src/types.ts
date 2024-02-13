@@ -43,6 +43,7 @@ export type EditTaskModalProps = {
   currentBoard: CurrentBoardState;
   setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
   task: TaskState;
+  startColumn: "backlog" | "inProgress" | "inReview" | "completed";
 };
 
 export type ColumnProps = {

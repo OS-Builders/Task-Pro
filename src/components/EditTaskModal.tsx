@@ -13,6 +13,7 @@ const EditTaskModal = ({
   currentBoard,
   setBoardState,
   task,
+  startColumn,
 }: EditTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
     taskname: task.name,
@@ -23,11 +24,13 @@ const EditTaskModal = ({
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault;
     console.log("Edit Task Form Submitted: ", formData);
-    // send POST request with the new task card, user and current board
+    // send POST request with the new task card, edited task and current board
     const fetchEditTask = async () => {
       const body = {
         ...formData,
-        taskId: task?._id,
+        taskId: task._id,
+        boardId: currentBoard.id,
+        startColumn: startColumn,
       };
       const response: Response = await fetch(`/tasks/edit`, {
         method: "POST",
@@ -36,14 +39,33 @@ const EditTaskModal = ({
         },
         body: JSON.stringify(body),
       });
-      const task: TaskState = await response.json();
+      const editedTask: TaskState = await response.json();
       if (response.status === 200) {
-        console.log("edited task: ", task);
         // update the board state, removing from array if necessary
-        setBoardState((prevState: BoardState) => ({
-          ...prevState,
-          [task.status]: [...prevState[task.status], task],
-        }));
+        setBoardState((prevState: BoardState) => {
+          const column = [...prevState[startColumn]];
+          const idx = column.indexOf(task);
+          // if changing columns, remove from startColumn and add to new column
+          if (task.status !== editedTask.status) {
+            column.splice(idx, 1);
+            return {
+              ...prevState,
+              [editedTask.status]: [
+                ...prevState[editedTask.status],
+                editedTask,
+              ],
+              [startColumn]: column,
+            };
+          }
+          // else update the existing column with new task name and notes
+          else {
+            column[idx] = editedTask;
+            return {
+              ...prevState,
+              [startColumn]: column,
+            };
+          }
+        });
       }
     };
     fetchEditTask().catch(console.error);
@@ -81,7 +103,7 @@ const EditTaskModal = ({
               id="backlog"
               value={"backlog"}
               onChange={handleInputChange}
-              checked={task.status === "backlog"}
+              defaultChecked={task.status === "backlog"}
             />
             <label htmlFor="backlog">Backlog</label>
             <input
@@ -90,7 +112,7 @@ const EditTaskModal = ({
               id="in-progress"
               value={"inProgress"}
               onChange={handleInputChange}
-              checked={task.status === "inProgress"}
+              defaultChecked={task.status === "inProgress"}
             />
             <label htmlFor="in-progress">In Progress</label>
             <input
@@ -99,7 +121,7 @@ const EditTaskModal = ({
               id="in-review"
               value={"inReview"}
               onChange={handleInputChange}
-              checked={task.status === "inReview"}
+              defaultChecked={task.status === "inReview"}
             />
             <label htmlFor="in-review">In Review</label>
             <input
@@ -108,7 +130,7 @@ const EditTaskModal = ({
               id="completed"
               value={"completed"}
               onChange={handleInputChange}
-              checked={task.status === "completed"}
+              defaultChecked={task.status === "completed"}
             />
             <label htmlFor="completed">Completed</label>
           </div>
