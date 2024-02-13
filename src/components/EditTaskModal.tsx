@@ -81,6 +81,27 @@ const EditTaskModal = ({
     setFormData((prevData: TaskFormState) => ({ ...prevData, [name]: value }));
   };
 
+  const handleDeleteTask = () => {
+    const fetchDeleteTask = async () => {
+      const response: Response = await fetch(`/tasks/delete/${task._id}`, {
+        method: "DELETE",
+      });
+      if (response.status === 200) {
+        setBoardState((prevState: BoardState) => {
+          const column = [...prevState[startColumn]];
+          const idx = column.indexOf(task);
+          column.splice(idx, 1);
+          return {
+            ...prevState,
+            [startColumn]: column,
+          };
+        });
+      }
+    };
+    fetchDeleteTask().catch(console.error);
+    setEditingTask(null);
+  };
+
   return createPortal(
     <div className="modal-overlay">
       <div className="modal">
@@ -153,6 +174,9 @@ const EditTaskModal = ({
               }}
             >
               Cancel
+            </button>
+            <button className="modal-delete" onClick={handleDeleteTask}>
+              Delete
             </button>
           </div>
         </form>

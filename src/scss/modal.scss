@@ -58,10 +58,6 @@
           padding: 10px 20px;
           border: none;
           border-radius: 5px;
-        }
-
-        .modal-submit {
-          background-color: #c3ff0e;
           width: 100px;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
@@ -73,14 +69,16 @@
           }
         }
 
+        .modal-submit {
+          background-color: #c3ff0e;
+        }
+
         .modal-cancel {
           background-color: goldenrod;
-          width: 100px;
-          cursor: pointer;
-          transition: all 0.3s ease-in-out;
-          &:hover {
-            transform: scale(1.1);
-          }
+        }
+
+        .modal-delete {
+          background-color: rgb(206, 61, 61);
         }
       }
     }

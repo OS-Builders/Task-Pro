@@ -123,6 +123,22 @@ const tasksController = {
       });
     }
   },
+  deleteTask: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const deletedTask = await Card.findOneAndDelete({
+        _id: req.params.taskId,
+      });
+      res.locals.task = deletedTask;
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.deleteTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error deleting Task" },
+      });
+    }
+  },
 };
 
 export default tasksController;

@@ -28,4 +28,14 @@ router.post(
   }
 );
 
+// route for deleting a task card
+router.delete(
+  "/delete/:taskId",
+  tasksController.deleteTask,
+  tasksController.pullTask,
+  (_req: Request, res: Response) => {
+    return res.status(200).json();
+  }
+);
+
 export default router;
