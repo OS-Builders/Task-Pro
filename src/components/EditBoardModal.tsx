@@ -1,19 +1,14 @@
 import { createPortal } from "react-dom";
-import { CreateBoardModalProps } from "../types";
+import { EditBoardModalProps } from "../types";
 import { useState } from "react";
 import "../scss/modal.scss";
 
-const CreateBoardModal = ({
-  setCreatingBoard,
+const EditBoardModal = ({
+  setEditingBoard,
   setCurrentBoard,
-  user,
-  boardList,
-  setBoardList,
-  handleBoardSelect,
-  selectedBoard,
-  setSelectedBoard,
-}: CreateBoardModalProps) => {
-  const [boardName, setBoardName] = useState<string>("");
+  currentBoard,
+}: EditBoardModalProps) => {
+  const [boardName, setBoardName] = useState<string>(currentBoard.name);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue: string = e.target.value;
@@ -22,43 +17,45 @@ const CreateBoardModal = ({
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // send post request to /boards/create with formData in body
+    // send put request to /boards/edit with new boardName and id in body
     const body = {
-      boardName: boardName,
-      userId: user.id,
+      name: boardName,
+      id: currentBoard.id,
     };
-    const response: Response = await fetch("/boards/create", {
-      method: "POST",
+    const response: Response = await fetch("/boards/edit", {
+      method: "PUT",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify(body),
     });
-    // receive username and id from backend
-    // if request success, save username to state and route to dashboard
+    // if request success, update currentBoard
     if (response.status === 200) {
       const responseData = await response.json();
-      console.log("Board created: ", responseData);
-      const newBoardListItem = (
-        <button
-          className={`board-selector ${
-            selectedBoard === responseData._id ? "selected" : ""
-          }`}
-          onClick={handleBoardSelect}
-          name={responseData.name}
-          id={responseData._id}
-          key={responseData._id}
-        >
-          {responseData.name}
-        </button>
-      );
-      setBoardList([...boardList, newBoardListItem]);
       setCurrentBoard({ name: responseData.name, id: responseData._id });
-      setSelectedBoard(responseData._id);
-      setCreatingBoard(false);
+      setEditingBoard(false);
     } else {
-      console.log("Failed To create board.");
+      console.log("Failed to edit board.");
     }
+  };
+
+  const handleDeleteBoard = () => {
+    const fetchDeleteBoard = async () => {
+      const response: Response = await fetch(
+        `/boards/delete/${currentBoard.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.status === 200) {
+        setCurrentBoard({
+          name: "",
+          id: "",
+        });
+        setEditingBoard(false);
+      }
+    };
+    fetchDeleteBoard().catch(console.error);
   };
 
   const isButtonDisabled: boolean = boardName === ""; //checking if boardName is empty? using trim in handle input
@@ -67,12 +64,12 @@ const CreateBoardModal = ({
     <div className="modal-overlay">
       <div className="modal">
         <form className="modal-form" onSubmit={handleFormSubmit}>
-          <h2 className="modal-title">New Board</h2>
+          <h2 className="modal-title">Edit Board</h2>
           <input
             className="modal-input"
             name="boardname"
             type="text"
-            placeholder="Enter Board Name"
+            value={boardName}
             onChange={handleInputChange}
             required
           />
@@ -88,10 +85,17 @@ const CreateBoardModal = ({
               className="modal-cancel"
               type="button"
               onClick={() => {
-                setCreatingBoard(false);
+                setEditingBoard(false);
               }}
             >
               Cancel
+            </button>
+            <button
+              className="modal-delete"
+              onClick={handleDeleteBoard}
+              type="button"
+            >
+              Delete
             </button>
           </div>
         </form>
@@ -101,4 +105,4 @@ const CreateBoardModal = ({
   );
 };
 
-export default CreateBoardModal;
+export default EditBoardModal;

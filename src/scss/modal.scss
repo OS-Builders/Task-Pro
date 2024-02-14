@@ -28,8 +28,8 @@
         text-align: center;
         font-size: 32px;
         color: goldenrod;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-          'Lucida Sans', Arial, sans-serif;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
       }
 
       .modal-input {
@@ -38,8 +38,13 @@
         width: 100%;
         box-sizing: border-box;
         font-size: 18px;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-          'Lucida Sans', Arial, sans-serif;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        border-radius: 10px;
+      }
+
+      .text {
+        height: 150px;
       }
 
       .modal-btns {
@@ -48,15 +53,11 @@
 
         button {
           font-size: 18px;
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-            'Lucida Sans', Arial, sans-serif;
+          font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+            "Lucida Sans", Arial, sans-serif;
           padding: 10px 20px;
           border: none;
           border-radius: 5px;
-        }
-
-        .modal-submit {
-          background-color: #c3ff0e;
           width: 100px;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
@@ -68,14 +69,16 @@
           }
         }
 
+        .modal-submit {
+          background-color: #c3ff0e;
+        }
+
         .modal-cancel {
           background-color: goldenrod;
-          width: 100px;
-          cursor: pointer;
-          transition: all 0.3s ease-in-out;
-          &:hover {
-            transform: scale(1.1);
-          }
+        }
+
+        .modal-delete {
+          background-color: rgb(206, 61, 61);
         }
       }
     }

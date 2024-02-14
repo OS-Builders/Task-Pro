@@ -1,15 +1,16 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 
 const router = express.Router();
 
 // import controllers
-import boardsController from '../controllers/boardsController.ts';
+import boardsController from "../controllers/boardsController.ts";
+import tasksController from "../controllers/tasksController.ts";
 
 // define routes
 
 // route for getting board names
 router.get(
-  '/:userId',
+  "/myboards/:userId",
   boardsController.getMyBoards,
   boardsController.getBoardNamesAndIds,
   (_req: Request, res: Response) => {
@@ -18,19 +19,41 @@ router.get(
 );
 
 router.get(
-  '/:boardID',
+  "/board",
   boardsController.getCurrentBoard,
+  tasksController.getTasks,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.boardInfo);
+    return res.status(200).json(res.locals.board);
   }
 );
 
 router.post(
-  '/create',
+  "/create",
   boardsController.createBoard,
   boardsController.assignNewBoard,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.createdBoard); //may need the board just created data to render into the main container
+  }
+);
+
+// route for deleting a boardd
+router.delete(
+  "/delete/:boardId",
+  boardsController.getBoardFromId,
+  tasksController.clearTask,
+  boardsController.deleteBoard,
+  boardsController.pullBoard,
+  (_req: Request, res: Response) => {
+    return res.status(200).json();
+  }
+);
+
+// route for editing a board
+router.put(
+  "/edit",
+  boardsController.editBoard,
+  (_req: Request, res: Response) => {
+    return res.status(200).json(res.locals.board);
   }
 );
 

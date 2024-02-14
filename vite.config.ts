@@ -19,6 +19,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/tasks": {
+        target:
+          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+        changeOrigin: true,
+        secure: false,
+      },
     },
     port: 5173,
   },

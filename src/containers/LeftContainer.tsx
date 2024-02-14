@@ -1,9 +1,13 @@
-import { BoardListItemState, ContainerProps } from "../types";
+import { BoardListItemState, LeftContainerProps } from "../types";
 import { ReactNode, useEffect, useState } from "react";
 import CreateBoardModal from "../components/CreateBoardModal";
 import "../scss/leftContainer.scss";
 
-const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
+const LeftContainer = ({
+  user,
+  setCurrentBoard,
+  currentBoard,
+}: LeftContainerProps) => {
   // creating state to open board creating modal
   const [creatingBoard, setCreatingBoard] = useState<boolean>(false);
   // creating state to store the list of board names
@@ -13,7 +17,7 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
   // make a request for all board naames, return an array containing strings of the board names
   useEffect(() => {
     const fetchBoardList = async () => {
-      const reponse: Response = await fetch(`/boards/${user.id}`);
+      const reponse: Response = await fetch(`/boards/myboards/${user.id}`);
       const list = await reponse.json();
       const boardSelectors = list.map((board: BoardListItemState) => (
         <button
@@ -32,7 +36,7 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
     };
     fetchBoardList().catch(console.error);
     // iterate through board names push buttons or components into array boardlist in state
-  }, []);
+  }, [currentBoard]);
 
   // function for changing board when click selection button
   const handleBoardSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,6 +73,7 @@ const LeftContainer = ({ user, setCurrentBoard }: ContainerProps) => {
           setBoardList={setBoardList}
           handleBoardSelect={handleBoardSelect}
           selectedBoard={selectedBoard}
+          setSelectedBoard={setSelectedBoard}
         />
       ) : null}
       <footer>
