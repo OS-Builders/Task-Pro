@@ -86,6 +86,7 @@ const CreateBoardModal = ({
             </button>
             <button
               className="modal-cancel"
+              type="button"
               onClick={() => {
                 setCreatingBoard(false);
               }}

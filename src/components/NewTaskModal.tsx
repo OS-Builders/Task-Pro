@@ -123,6 +123,7 @@ const NewTaskModal = ({
             </button>
             <button
               className="modal-cancel"
+              type="button"
               onClick={() => {
                 setAddingTask(false);
               }}

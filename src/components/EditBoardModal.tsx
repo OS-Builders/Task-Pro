@@ -19,7 +19,7 @@ const EditBoardModal = ({
     e.preventDefault();
     // send put request to /boards/edit with new boardName and id in body
     const body = {
-      boardName: boardName,
+      name: boardName,
       id: currentBoard.id,
     };
     const response: Response = await fetch("/boards/edit", {
@@ -83,13 +83,18 @@ const EditBoardModal = ({
             </button>
             <button
               className="modal-cancel"
+              type="button"
               onClick={() => {
                 setEditingBoard(false);
               }}
             >
               Cancel
             </button>
-            <button className="modal-delete" onClick={handleDeleteBoard}>
+            <button
+              className="modal-delete"
+              onClick={handleDeleteBoard}
+              type="button"
+            >
               Delete
             </button>
           </div>

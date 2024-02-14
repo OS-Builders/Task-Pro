@@ -169,13 +169,18 @@ const EditTaskModal = ({
             </button>
             <button
               className="modal-cancel"
+              type="button"
               onClick={() => {
                 setEditingTask(null);
               }}
             >
               Cancel
             </button>
-            <button className="modal-delete" onClick={handleDeleteTask}>
+            <button
+              className="modal-delete"
+              type="button"
+              onClick={handleDeleteTask}
+            >
               Delete
             </button>
           </div>

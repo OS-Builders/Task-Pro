@@ -144,6 +144,7 @@ const boardsController = {
       await Board.findOneAndDelete({
         _id: req.params.boardId,
       });
+      console.log("board deleted");
       return next();
     } catch (err) {
       // pass error through to global error handler
@@ -151,6 +152,43 @@ const boardsController = {
         log: `tasksController.deleteBoard ERROR: ${err}`,
         status: 500,
         message: { err: "Error deleting board" },
+      });
+    }
+  },
+  editBoard: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const editedBoard = await Board.findByIdAndUpdate(
+        req.body.id,
+        {
+          name: req.body.name,
+        },
+        { new: true }
+      );
+      console.log("editedBoard: ", editedBoard);
+      res.locals.board = editedBoard;
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.editBoard ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error editing Board" },
+      });
+    }
+  },
+  pullBoard: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await User.updateOne(
+        { _id: res.locals.board.boardOwner },
+        { $pull: { boards: req.params.boardId } }
+      );
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.pullTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error pulling Task" },
       });
     }
   },
