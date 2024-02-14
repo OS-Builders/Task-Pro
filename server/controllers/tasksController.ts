@@ -139,6 +139,28 @@ const tasksController = {
       });
     }
   },
+  clearTask: async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      await Card.deleteMany({
+        _id: {
+          $in: [
+            ...res.locals.board.backlog,
+            ...res.locals.board.inProgress,
+            ...res.locals.board.inReview,
+            ...res.locals.board.completed,
+          ],
+        },
+      });
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.clearTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error clearing Tasks" },
+      });
+    }
+  },
 };
 
 export default tasksController;

@@ -7,7 +7,6 @@ import EditTaskModal from "./EditTaskModal.tsx";
 const Column = ({
   name,
   create,
-  user,
   currentBoard,
   boardState,
   setBoardState,
@@ -37,12 +36,7 @@ const Column = ({
     // map column to an array of task card components and then set as the state
     const cardsArray = column.map((task: TaskState) => {
       return (
-        <Card
-          info={task}
-          editingTask={editingTask}
-          setEditingTask={setEditingTask}
-          key={task._id}
-        />
+        <Card info={task} setEditingTask={setEditingTask} key={task._id} />
       );
     });
     setTaskCards(cardsArray);

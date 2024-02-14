@@ -36,4 +36,15 @@ router.post(
   }
 );
 
+// route for deleting a task card
+router.delete(
+  "/delete/:boardId",
+  boardsController.getBoardFromId,
+  tasksController.clearTask,
+  boardsController.deleteBoard,
+  (_req: Request, res: Response) => {
+    return res.status(200).json();
+  }
+);
+
 export default router;

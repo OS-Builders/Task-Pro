@@ -3,7 +3,11 @@ import { ReactNode, useEffect, useState } from "react";
 import CreateBoardModal from "../components/CreateBoardModal";
 import "../scss/leftContainer.scss";
 
-const LeftContainer = ({ user, setCurrentBoard }: LeftContainerProps) => {
+const LeftContainer = ({
+  user,
+  setCurrentBoard,
+  currentBoard,
+}: LeftContainerProps) => {
   // creating state to open board creating modal
   const [creatingBoard, setCreatingBoard] = useState<boolean>(false);
   // creating state to store the list of board names
@@ -32,7 +36,7 @@ const LeftContainer = ({ user, setCurrentBoard }: LeftContainerProps) => {
     };
     fetchBoardList().catch(console.error);
     // iterate through board names push buttons or components into array boardlist in state
-  }, []);
+  }, [currentBoard]);
 
   // function for changing board when click selection button
   const handleBoardSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,6 +73,7 @@ const LeftContainer = ({ user, setCurrentBoard }: LeftContainerProps) => {
           setBoardList={setBoardList}
           handleBoardSelect={handleBoardSelect}
           selectedBoard={selectedBoard}
+          setSelectedBoard={setSelectedBoard}
         />
       ) : null}
       <footer>

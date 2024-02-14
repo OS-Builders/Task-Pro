@@ -124,6 +124,36 @@ const boardsController = {
       });
     }
   },
+  getBoardFromId: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // obtain the user document
+      const board = await Board.findOne({ _id: req.params.boardId });
+      res.locals.board = board;
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `boardssController.getBoardFromId ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error getting board" },
+      });
+    }
+  },
+  deleteBoard: async (req: Request, _res: Response, next: NextFunction) => {
+    try {
+      await Board.findOneAndDelete({
+        _id: req.params.boardId,
+      });
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.deleteBoard ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error deleting board" },
+      });
+    }
+  },
 };
 
 export default boardsController;

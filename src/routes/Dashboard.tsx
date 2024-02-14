@@ -13,8 +13,16 @@ const Dashboard = ({ user }: DashboardProps) => {
   //state confirmDelete false
   return (
     <div className="main-page">
-      <LeftContainer user={user} setCurrentBoard={setCurrentBoard} />
-      <MainContainer user={user} currentBoard={currentBoard} />
+      <LeftContainer
+        user={user}
+        setCurrentBoard={setCurrentBoard}
+        currentBoard={currentBoard}
+      />
+      <MainContainer
+        user={user}
+        setCurrentBoard={setCurrentBoard}
+        currentBoard={currentBoard}
+      />
     </div>
   );
 };

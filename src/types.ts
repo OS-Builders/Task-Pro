@@ -15,11 +15,13 @@ export type DashboardProps = {
 export type LeftContainerProps = {
   user: UserState;
   setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  currentBoard: CurrentBoardState;
 };
 
 export type MainContainerProps = {
   user: UserState;
   currentBoard: CurrentBoardState;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
 };
 
 export type CreateBoardModalProps = {
@@ -30,6 +32,13 @@ export type CreateBoardModalProps = {
   user: UserState;
   handleBoardSelect: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedBoard: string | null;
+  setSelectedBoard: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export type EditBoardModalProps = {
+  setEditingBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  currentBoard: CurrentBoardState;
 };
 
 export type NewTaskModalProps = {
