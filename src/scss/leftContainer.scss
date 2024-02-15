@@ -7,8 +7,11 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  h1 {
+
+  .heading {
     padding: 10px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   }
   footer {
     margin-top: auto;

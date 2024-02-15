@@ -107,7 +107,9 @@ const EditTaskModal = ({
       <div className="modal">
         <form className="modal-form" onSubmit={handleFormSubmit}>
           <h2 className="modal-title">Edit Task</h2>
-          <label htmlFor="taskname">Task Name: </label>
+          <label htmlFor="taskname" className="modal-label">
+            Task Name:{" "}
+          </label>
           <input
             className="modal-input"
             name="taskname"
@@ -116,46 +118,69 @@ const EditTaskModal = ({
             onChange={handleInputChange}
             required
           />
-          <label htmlFor="modal-radio">Task Status: </label>
+          <label htmlFor="modal-radio" className="modal-label">
+            Task Status:{" "}
+          </label>
           <div className="modal-radio">
-            <input
-              type="radio"
-              name="status"
-              id="backlog"
-              value={"backlog"}
-              onChange={handleInputChange}
-              defaultChecked={task.status === "backlog"}
-            />
-            <label htmlFor="backlog">Backlog</label>
-            <input
-              type="radio"
-              name="status"
-              id="in-progress"
-              value={"inProgress"}
-              onChange={handleInputChange}
-              defaultChecked={task.status === "inProgress"}
-            />
-            <label htmlFor="in-progress">In Progress</label>
-            <input
-              type="radio"
-              name="status"
-              id="in-review"
-              value={"inReview"}
-              onChange={handleInputChange}
-              defaultChecked={task.status === "inReview"}
-            />
-            <label htmlFor="in-review">In Review</label>
-            <input
-              type="radio"
-              name="status"
-              id="completed"
-              value={"completed"}
-              onChange={handleInputChange}
-              defaultChecked={task.status === "completed"}
-            />
-            <label htmlFor="completed">Completed</label>
+            <div className="modal-radio-pair">
+              <input
+                type="radio"
+                name="status"
+                id="backlog"
+                value={"backlog"}
+                onChange={handleInputChange}
+                defaultChecked={task.status === "backlog"}
+              />
+              <label htmlFor="backlog" className="modal-option">
+                Backlog
+              </label>
+            </div>
+
+            <div className="modal-radio-pair">
+              <input
+                type="radio"
+                name="status"
+                id="in-progress"
+                value={"inProgress"}
+                onChange={handleInputChange}
+                defaultChecked={task.status === "inProgress"}
+              />
+              <label htmlFor="in-progress" className="modal-option">
+                In Progress
+              </label>
+            </div>
+
+            <div className="modal-radio-pair">
+              <input
+                type="radio"
+                name="status"
+                id="in-review"
+                value={"inReview"}
+                onChange={handleInputChange}
+                defaultChecked={task.status === "inReview"}
+              />
+              <label htmlFor="in-review" className="modal-option">
+                In Review
+              </label>
+            </div>
+
+            <div className="modal-radio-pair">
+              <input
+                type="radio"
+                name="status"
+                id="completed"
+                value={"completed"}
+                onChange={handleInputChange}
+                defaultChecked={task.status === "completed"}
+              />
+              <label htmlFor="completed" className="modal-option">
+                Completed
+              </label>
+            </div>
           </div>
-          <label htmlFor="tasknotes">Task Notes: </label>
+          <label htmlFor="tasknotes" className="modal-label">
+            Task Notes:{" "}
+          </label>
           <textarea
             className="modal-input text"
             name="tasknotes"
