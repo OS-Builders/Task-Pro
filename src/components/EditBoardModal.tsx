@@ -12,7 +12,7 @@ const EditBoardModal = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue: string = e.target.value;
-    setBoardName(inputValue.trim()); //edge case for whitespace
+    setBoardName(inputValue); //edge case for whitespace
   };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -12,8 +12,11 @@
     margin: 10px;
 
     .edit-board-btn {
-      padding: 5;
-      height: fit-content;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: lightgrey;
+      cursor: pointer;
 
       .edit-svg {
         width: 20px;
@@ -24,6 +27,9 @@
 
     .board-title {
       margin: 0 auto;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      font-size: 32px;
     }
   }
 }

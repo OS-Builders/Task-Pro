@@ -17,6 +17,8 @@
     padding: 30px;
     width: 35%;
     border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     .modal-form {
       display: flex;
@@ -41,6 +43,21 @@
         font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
           "Lucida Sans", Arial, sans-serif;
         border-radius: 10px;
+      }
+
+      .modal-radio {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .modal-label {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      .modal-option {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
       }
 
       .text {

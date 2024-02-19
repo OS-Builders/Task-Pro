@@ -11,11 +11,25 @@
     background-color: rgb(70, 70, 70);
     margin: 0px 10px;
     border-radius: 15px;
+    box-shadow: 0 60px 30px -60px rgba(0, 0, 0, 0.45) inset,
+      -60px 0 30px -60px rgba(0, 0, 0, 0.45) inset;
+
+    .column-title {
+      font-size: 24px;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    }
 
     .new-task-btn {
       width: 90%;
       padding: 10px;
       cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      font-size: 18px;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      box-shadow: 6.1px 12.2px 12.2px hsl(0deg 0% 0% / 0.31);
     }
   }
 }
