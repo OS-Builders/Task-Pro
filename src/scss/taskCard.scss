@@ -7,6 +7,7 @@
   flex-direction: column;
   gap: 10px;
   box-shadow: 6.1px 12.2px 12.2px hsl(0deg 0% 0% / 0.31);
+  height: fit-content;
 
   .task-name {
     color: black;
@@ -36,7 +37,7 @@
 
       .task-svg {
         width: 20px;
-        height: auto;
+        height: 20px;
       }
     }
   }

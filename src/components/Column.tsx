@@ -3,6 +3,7 @@ import { ColumnProps, TaskState } from "../types";
 import NewTaskModal from "./NewTaskModal";
 import Card from "./Card.tsx";
 import EditTaskModal from "./EditTaskModal.tsx";
+import { useDroppable } from "@dnd-kit/core";
 
 const Column = ({
   name,
@@ -22,6 +23,10 @@ const Column = ({
 
   // state for editing a task card
   const [editingTask, setEditingTask] = useState<TaskState | null>(null);
+
+  const { setNodeRef } = useDroppable({
+    id: name,
+  });
 
   // render new task modal on button click
   const handleNewTask = () => {
@@ -43,7 +48,7 @@ const Column = ({
   }, [boardState, name]);
 
   return (
-    <div className="column">
+    <div className="column" ref={setNodeRef}>
       <h2 className="column-title">
         {(name === "backlog"
           ? "Backlog"
