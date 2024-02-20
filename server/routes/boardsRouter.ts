@@ -36,4 +36,25 @@ router.post(
   }
 );
 
+// route for deleting a boardd
+router.delete(
+  "/delete/:boardId",
+  boardsController.getBoardFromId,
+  tasksController.clearTask,
+  boardsController.deleteBoard,
+  boardsController.pullBoard,
+  (_req: Request, res: Response) => {
+    return res.status(200).json();
+  }
+);
+
+// route for editing a board
+router.put(
+  "/edit",
+  boardsController.editBoard,
+  (_req: Request, res: Response) => {
+    return res.status(200).json(res.locals.board);
+  }
+);
+
 export default router;

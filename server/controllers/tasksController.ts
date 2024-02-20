@@ -10,7 +10,7 @@ const tasksController = {
         status: req.body.status,
         notes: req.body.tasknotes,
       });
-      res.locals.createdTask = createdTask;
+      res.locals.task = createdTask;
 
       return next();
     } catch (err) {
@@ -27,18 +27,18 @@ const tasksController = {
       const column = req.body.status;
       let updateQuery;
       if (column === "backlog") {
-        updateQuery = { $push: { backlog: res.locals.createdTask._id } };
+        updateQuery = { $push: { backlog: res.locals.task._id } };
       } else if (column === "inProgress") {
         updateQuery = {
-          $push: { inProgress: res.locals.createdTask._id },
+          $push: { inProgress: res.locals.task._id },
         };
       } else if (column === "inReview") {
         updateQuery = {
-          $push: { inReview: res.locals.createdTask._id },
+          $push: { inReview: res.locals.task._id },
         };
       } else {
         updateQuery = {
-          $push: { completed: res.locals.createdTask._id },
+          $push: { completed: res.locals.task._id },
         };
       }
       await Board.updateOne({ _id: req.body.boardId }, updateQuery);
@@ -66,6 +66,98 @@ const tasksController = {
         log: `tasksController.getTasks ERROR: ${err}`,
         status: 500,
         message: { err: "Error getting Tasks" },
+      });
+    }
+  },
+  editTask: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const taskEdits = req.body;
+      const editedTask = await Card.findByIdAndUpdate(
+        taskEdits.taskId,
+        {
+          name: taskEdits.taskname,
+          status: taskEdits.status,
+          notes: taskEdits.tasknotes,
+        },
+        { new: true }
+      );
+      res.locals.task = editedTask;
+
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.editTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error editing Task" },
+      });
+    }
+  },
+  pullTask: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const column = req.body.startColumn;
+      let updateQuery;
+      if (column === "backlog") {
+        updateQuery = { $pull: { backlog: res.locals.task._id } };
+      } else if (column === "inProgress") {
+        updateQuery = {
+          $pull: { inProgress: res.locals.task._id },
+        };
+      } else if (column === "inReview") {
+        updateQuery = {
+          $pull: { inReview: res.locals.task._id },
+        };
+      } else {
+        updateQuery = {
+          $pull: { completed: res.locals.task._id },
+        };
+      }
+      await Board.updateOne({ _id: req.body.boardId }, updateQuery);
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.pullTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error pulling Task" },
+      });
+    }
+  },
+  deleteTask: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const deletedTask = await Card.findOneAndDelete({
+        _id: req.params.taskId,
+      });
+      res.locals.task = deletedTask;
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.deleteTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error deleting Task" },
+      });
+    }
+  },
+  clearTask: async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      await Card.deleteMany({
+        _id: {
+          $in: [
+            ...res.locals.board.backlog,
+            ...res.locals.board.inProgress,
+            ...res.locals.board.inReview,
+            ...res.locals.board.completed,
+          ],
+        },
+      });
+      return next();
+    } catch (err) {
+      // pass error through to global error handler
+      return next({
+        log: `tasksController.clearTask ERROR: ${err}`,
+        status: 500,
+        message: { err: "Error clearing Tasks" },
       });
     }
   },

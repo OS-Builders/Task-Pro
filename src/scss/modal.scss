@@ -17,6 +17,8 @@
     padding: 30px;
     width: 35%;
     border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     .modal-form {
       display: flex;
@@ -43,6 +45,21 @@
         border-radius: 10px;
       }
 
+      .modal-radio {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .modal-label {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      .modal-option {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
       .text {
         height: 150px;
       }
@@ -58,10 +75,6 @@
           padding: 10px 20px;
           border: none;
           border-radius: 5px;
-        }
-
-        .modal-submit {
-          background-color: #c3ff0e;
           width: 100px;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
@@ -73,14 +86,16 @@
           }
         }
 
+        .modal-submit {
+          background-color: #c3ff0e;
+        }
+
         .modal-cancel {
           background-color: goldenrod;
-          width: 100px;
-          cursor: pointer;
-          transition: all 0.3s ease-in-out;
-          &:hover {
-            transform: scale(1.1);
-          }
+        }
+
+        .modal-delete {
+          background-color: rgb(206, 61, 61);
         }
       }
     }

@@ -1,53 +1,75 @@
 import { createPortal } from "react-dom";
 import {
   BoardState,
-  NewTaskModalProps,
+  EditTaskModalProps,
   TaskFormState,
   TaskState,
 } from "../types";
 import { useState } from "react";
 import "../scss/modal.scss";
 
-const NewTaskModal = ({
-  setAddingTask,
+const EditTaskModal = ({
+  setEditingTask,
   currentBoard,
   setBoardState,
-}: NewTaskModalProps) => {
+  task,
+  startColumn,
+}: EditTaskModalProps) => {
   const [formData, setFormData] = useState<TaskFormState>({
-    taskname: "",
-    status: "backlog",
-    tasknotes: "",
+    taskname: task.name,
+    status: task.status,
+    tasknotes: task.notes,
   });
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault;
-    console.log("New Task Form Submitted: ", formData);
-    // send POST request with the new task card, user and current board
-    const fetchAddTask = async () => {
-      if (currentBoard && currentBoard.name !== "") {
-        const body = {
-          ...formData,
-          boardId: currentBoard.id,
-        };
-        const response: Response = await fetch(`/tasks/create`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-          body: JSON.stringify(body),
+    console.log("Edit Task Form Submitted: ", formData);
+    // send POST request with the new task card, edited task and current board
+    const fetchEditTask = async () => {
+      const body = {
+        ...formData,
+        taskId: task._id,
+        boardId: currentBoard.id,
+        startColumn: startColumn,
+      };
+      const response: Response = await fetch(`/tasks/edit`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(body),
+      });
+      const editedTask: TaskState = await response.json();
+      if (response.status === 200) {
+        // update the board state, removing from array if necessary
+        setBoardState((prevState: BoardState) => {
+          const column = [...prevState[startColumn]];
+          const idx = column.indexOf(task);
+          // if changing columns, remove from startColumn and add to new column
+          if (task.status !== editedTask.status) {
+            column.splice(idx, 1);
+            return {
+              ...prevState,
+              [editedTask.status]: [
+                ...prevState[editedTask.status],
+                editedTask,
+              ],
+              [startColumn]: column,
+            };
+          }
+          // else update the existing column with new task name and notes
+          else {
+            column[idx] = editedTask;
+            return {
+              ...prevState,
+              [startColumn]: column,
+            };
+          }
         });
-        const task: TaskState = await response.json();
-        if (response.status === 200) {
-          console.log("newly created task: ", task);
-          setBoardState((prevState: BoardState) => ({
-            ...prevState,
-            [task.status]: [...prevState[task.status], task],
-          }));
-        }
       }
     };
-    fetchAddTask().catch(console.error);
-    setAddingTask(false);
+    fetchEditTask().catch(console.error);
+    setEditingTask(null);
   };
 
   const handleInputChange = (
@@ -59,11 +81,32 @@ const NewTaskModal = ({
     setFormData((prevData: TaskFormState) => ({ ...prevData, [name]: value }));
   };
 
+  const handleDeleteTask = () => {
+    const fetchDeleteTask = async () => {
+      const response: Response = await fetch(`/tasks/delete/${task._id}`, {
+        method: "DELETE",
+      });
+      if (response.status === 200) {
+        setBoardState((prevState: BoardState) => {
+          const column = [...prevState[startColumn]];
+          const idx = column.indexOf(task);
+          column.splice(idx, 1);
+          return {
+            ...prevState,
+            [startColumn]: column,
+          };
+        });
+      }
+    };
+    fetchDeleteTask().catch(console.error);
+    setEditingTask(null);
+  };
+
   return createPortal(
     <div className="modal-overlay">
       <div className="modal">
         <form className="modal-form" onSubmit={handleFormSubmit}>
-          <h2 className="modal-title">New Task</h2>
+          <h2 className="modal-title">Edit Task</h2>
           <label htmlFor="taskname" className="modal-label">
             Task Name:{" "}
           </label>
@@ -71,7 +114,7 @@ const NewTaskModal = ({
             className="modal-input"
             name="taskname"
             type="text"
-            placeholder="New Task"
+            value={formData.taskname}
             onChange={handleInputChange}
             required
           />
@@ -86,12 +129,13 @@ const NewTaskModal = ({
                 id="backlog"
                 value={"backlog"}
                 onChange={handleInputChange}
-                defaultChecked
+                defaultChecked={task.status === "backlog"}
               />
               <label htmlFor="backlog" className="modal-option">
                 Backlog
               </label>
             </div>
+
             <div className="modal-radio-pair">
               <input
                 type="radio"
@@ -99,11 +143,13 @@ const NewTaskModal = ({
                 id="in-progress"
                 value={"inProgress"}
                 onChange={handleInputChange}
+                defaultChecked={task.status === "inProgress"}
               />
               <label htmlFor="in-progress" className="modal-option">
                 In Progress
               </label>
             </div>
+
             <div className="modal-radio-pair">
               <input
                 type="radio"
@@ -111,11 +157,13 @@ const NewTaskModal = ({
                 id="in-review"
                 value={"inReview"}
                 onChange={handleInputChange}
+                defaultChecked={task.status === "inReview"}
               />
               <label htmlFor="in-review" className="modal-option">
                 In Review
               </label>
             </div>
+
             <div className="modal-radio-pair">
               <input
                 type="radio"
@@ -123,6 +171,7 @@ const NewTaskModal = ({
                 id="completed"
                 value={"completed"}
                 onChange={handleInputChange}
+                defaultChecked={task.status === "completed"}
               />
               <label htmlFor="completed" className="modal-option">
                 Completed
@@ -135,22 +184,29 @@ const NewTaskModal = ({
           <textarea
             className="modal-input text"
             name="tasknotes"
-            placeholder="Task Notes"
+            value={formData.tasknotes}
             onChange={handleInputChange}
             required
           />
           <div className="modal-btns">
             <button className="modal-submit" type="submit">
-              Add Task
+              Save
             </button>
             <button
               className="modal-cancel"
               type="button"
               onClick={() => {
-                setAddingTask(false);
+                setEditingTask(null);
               }}
             >
               Cancel
+            </button>
+            <button
+              className="modal-delete"
+              type="button"
+              onClick={handleDeleteTask}
+            >
+              Delete
             </button>
           </div>
         </form>
@@ -160,4 +216,4 @@ const NewTaskModal = ({
   );
 };
 
-export default NewTaskModal;
+export default EditTaskModal;

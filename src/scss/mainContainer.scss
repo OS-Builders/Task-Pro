@@ -5,8 +5,31 @@
   text-align: center;
   height: 100%;
 
-  .board-title {
-    height: 5%;
-    margin: 0;
+  .main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+
+    .edit-board-btn {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: lightgrey;
+      cursor: pointer;
+
+      .edit-svg {
+        width: 20px;
+        height: auto;
+        margin: 0;
+      }
+    }
+
+    .board-title {
+      margin: 0 auto;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      font-size: 32px;
+    }
   }
 }

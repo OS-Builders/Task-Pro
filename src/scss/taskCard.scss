@@ -1,31 +1,43 @@
 .task-card {
   background-color: #a0d308;
-  padding: 5px;
+  padding: 10px 5px 5px;
   margin: 15px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 6.1px 12.2px 12.2px hsl(0deg 0% 0% / 0.31);
 
   .task-name {
     color: black;
     margin: 0;
+    font-size: 18px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   }
 
   .task-notes {
     color: black;
     margin: 0;
+    font-size: 14px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   }
 
-  .toggle-notes-btn {
-    cursor: pointer;
-    border: none;
-    background: none;
-    align-self: self-end;
+  .task-btns-container {
+    display: flex;
+    justify-content: space-between;
 
-    .notes-svg {
-      width: 20px;
-      height: auto;
+    .task-btn {
+      cursor: pointer;
+      border: none;
+      background: none;
+      align-self: self-end;
+
+      .task-svg {
+        width: 20px;
+        height: auto;
+      }
     }
   }
 }

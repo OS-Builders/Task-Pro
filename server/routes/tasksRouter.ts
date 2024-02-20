@@ -13,7 +13,28 @@ router.post(
   tasksController.createTask,
   tasksController.assignTask,
   (_req: Request, res: Response) => {
-    return res.status(200).json(res.locals.createdTask);
+    return res.status(200).json(res.locals.task);
+  }
+);
+
+// route for editing a task card
+router.post(
+  "/edit",
+  tasksController.editTask,
+  tasksController.pullTask,
+  tasksController.assignTask,
+  (_req: Request, res: Response) => {
+    return res.status(200).json(res.locals.task);
+  }
+);
+
+// route for deleting a task card
+router.delete(
+  "/delete/:taskId",
+  tasksController.deleteTask,
+  tasksController.pullTask,
+  (_req: Request, res: Response) => {
+    return res.status(200).json();
   }
 );
 

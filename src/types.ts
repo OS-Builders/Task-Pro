@@ -15,11 +15,13 @@ export type DashboardProps = {
 export type LeftContainerProps = {
   user: UserState;
   setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  currentBoard: CurrentBoardState;
 };
 
 export type MainContainerProps = {
   user: UserState;
   currentBoard: CurrentBoardState;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
 };
 
 export type CreateBoardModalProps = {
@@ -30,14 +32,27 @@ export type CreateBoardModalProps = {
   user: UserState;
   handleBoardSelect: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedBoard: string | null;
+  setSelectedBoard: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export type EditBoardModalProps = {
+  setEditingBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentBoard: React.Dispatch<React.SetStateAction<CurrentBoardState>>;
+  currentBoard: CurrentBoardState;
 };
 
 export type NewTaskModalProps = {
   setAddingTask: React.Dispatch<React.SetStateAction<boolean>>;
   currentBoard: CurrentBoardState;
-  user: UserState;
-  setTaskCards: React.Dispatch<React.SetStateAction<React.ReactNode[]>>;
   setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
+};
+
+export type EditTaskModalProps = {
+  setEditingTask: React.Dispatch<React.SetStateAction<TaskState | null>>;
+  currentBoard: CurrentBoardState;
+  setBoardState: React.Dispatch<React.SetStateAction<BoardState>>;
+  task: TaskState;
+  startColumn: "backlog" | "inProgress" | "inReview" | "completed";
 };
 
 export type ColumnProps = {
@@ -58,6 +73,7 @@ export type ColumnContainerProps = {
 
 export type CardProps = {
   info: TaskState;
+  setEditingTask: React.Dispatch<React.SetStateAction<TaskState | null>>;
 };
 // STATE TYPES
 export interface UserState {
