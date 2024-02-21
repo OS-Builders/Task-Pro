@@ -11,19 +11,11 @@ const Column = ({
   boardState,
   setBoardState,
 }: ColumnProps) => {
-  // state for rendering new task modal
   const [addingTask, setAddingTask] = useState<boolean>(false);
-
-  // state for number of tasks in a column
   const [numTasks, setNumTasks] = useState<number>(0);
-
-  // state for storing task card components
   const [taskCards, setTaskCards] = useState<ReactNode[]>([]);
-
-  // state for editing a task card
   const [editingTask, setEditingTask] = useState<TaskState | null>(null);
 
-  // render new task modal on button click
   const handleNewTask = () => {
     setAddingTask(true);
   };
@@ -31,9 +23,7 @@ const Column = ({
   //effect for rendering cards
   useEffect(() => {
     const column = boardState[name];
-    console.log("Column column: ", column);
     setNumTasks(column.length);
-    // map column to an array of task card components and then set as the state
     const cardsArray = column.map((task: TaskState) => {
       return (
         <Card info={task} setEditingTask={setEditingTask} key={task._id} />
