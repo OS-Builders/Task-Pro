@@ -5,12 +5,10 @@ import { useState } from "react";
 import "../scss/dashBoard.scss";
 
 const Dashboard = ({ user }: DashboardProps) => {
-  // state of current board selected
   const [currentBoard, setCurrentBoard] = useState<CurrentBoardState>({
     name: "",
     id: "",
   });
-  //state confirmDelete false
   return (
     <div className="main-page">
       <LeftContainer

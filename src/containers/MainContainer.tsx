@@ -17,7 +17,6 @@ const MainContainer = ({
     inReview: [],
     completed: [],
   });
-
   const [editingBoard, setEditingBoard] = useState<boolean>(false);
 
   // effect for fetching the current board info whenever currentBoard changes
@@ -29,8 +28,6 @@ const MainContainer = ({
           `/boards/board?board=${currentBoard.id}&user=${user.id}`
         );
         const board = await reponse.json();
-        // update state with the fetched data
-        console.log("MainContainer board: ", board);
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { boardOwner, name, _id, __v, ...columns } = board;
         await setBoardState({ ...columns });
@@ -38,11 +35,6 @@ const MainContainer = ({
     };
     fetchBoard().catch(console.error);
   }, [currentBoard]);
-
-  //
-  useEffect(() => {
-    console.log("MainContainer boardState:", boardState); // Log the updated state after it's set
-  }, [boardState]); // Log when the boardState changes
 
   if (!currentBoard?.name) {
     return (

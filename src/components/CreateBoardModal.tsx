@@ -34,11 +34,9 @@ const CreateBoardModal = ({
       },
       body: JSON.stringify(body),
     });
-    // receive username and id from backend
-    // if request success, save username to state and route to dashboard
+    // receive board name and id from backend
     if (response.status === 200) {
       const responseData = await response.json();
-      console.log("Board created: ", responseData);
       const newBoardListItem = (
         <button
           className={`board-selector ${
@@ -61,7 +59,7 @@ const CreateBoardModal = ({
     }
   };
 
-  const isButtonDisabled: boolean = boardName === ""; //checking if boardName is empty? using trim in handle input
+  const isButtonDisabled: boolean = boardName === "";
 
   return createPortal(
     <div className="modal-overlay">

@@ -6,7 +6,7 @@ import { BoardListItemState, BoardType } from "../../src/types.ts";
 const boardsController = {
   getMyBoards: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // find all boards beloning to the user, push board names into an array and save on locals
+      // find all boards from the user, push board names into an array and save on locals
       const user = await User.findOne({ _id: req.params.userId }).populate(
         "boards"
       );
@@ -144,7 +144,6 @@ const boardsController = {
       await Board.findOneAndDelete({
         _id: req.params.boardId,
       });
-      console.log("board deleted");
       return next();
     } catch (err) {
       // pass error through to global error handler
@@ -164,7 +163,6 @@ const boardsController = {
         },
         { new: true }
       );
-      console.log("editedBoard: ", editedBoard);
       res.locals.board = editedBoard;
       return next();
     } catch (err) {

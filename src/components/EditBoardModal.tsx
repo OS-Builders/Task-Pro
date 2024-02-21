@@ -29,7 +29,7 @@ const EditBoardModal = ({
       },
       body: JSON.stringify(body),
     });
-    // if request success, update currentBoard
+    // receive board name and id from backend
     if (response.status === 200) {
       const responseData = await response.json();
       setCurrentBoard({ name: responseData.name, id: responseData._id });
@@ -58,7 +58,7 @@ const EditBoardModal = ({
     fetchDeleteBoard().catch(console.error);
   };
 
-  const isButtonDisabled: boolean = boardName === ""; //checking if boardName is empty? using trim in handle input
+  const isButtonDisabled: boolean = boardName === "";
 
   return createPortal(
     <div className="modal-overlay">

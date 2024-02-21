@@ -18,6 +18,7 @@ router.get(
   }
 );
 
+// route for getting all tasks associated with a board
 router.get(
   "/board",
   boardsController.getCurrentBoard,
@@ -27,6 +28,7 @@ router.get(
   }
 );
 
+// route for creating a new baord
 router.post(
   "/create",
   boardsController.createBoard,

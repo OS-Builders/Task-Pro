@@ -24,7 +24,7 @@ const EditTaskModal = ({
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault;
     console.log("Edit Task Form Submitted: ", formData);
-    // send POST request with the new task card, edited task and current board
+    // send POST request with the  edited task, originla column and current board
     const fetchEditTask = async () => {
       const body = {
         ...formData,
