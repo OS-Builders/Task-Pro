@@ -1,6 +1,14 @@
 # Task Pro
 
-Task Pro is an intuitive web application crafted to streamline task and project management. It empowers users of all proficiency levels to enhance their time management and organizational abilities with its user-friendly interface. Whether you opt for private usage or collaboration, Task Pro offers a comprehensive solution for creating, organizing, and sharing projects seamlessly.
+Task Pro is an intuitive web application crafted to streamline project and task management. 
+
+It empowers users of all proficiency levels to enhance their time management and organizational abilities with its user-friendly interface. 
+
+Whether you opt for private usage or collaboration, Task Pro offers a comprehensive solution for creating, organizing, and sharing projects seamlessly.
+
+## Technologies
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
 ## Project Frames
 ![Project Frame](src/assets/projectFrame.png)
@@ -12,6 +20,8 @@ Task Pro is an intuitive web application crafted to streamline task and project 
 ### User Sign-Up and Login
 - Easily create a user profile to personalize user experience.
 - Secure authentication ensures your private boards are only accessible to you.
+
+
 ![Authentication](src/assets/authPage.png)
 
 
@@ -19,6 +29,7 @@ Task Pro is an intuitive web application crafted to streamline task and project 
 ### Board Management
 - Create new board with ease.
 - Organize your task for different stage for efficiently managing a project.
+
 
 ![Dashboard](src/assets/Dashboard.png)
 
@@ -32,7 +43,7 @@ Task Pro is an intuitive web application crafted to streamline task and project 
 
 - Developed using **React** for a responsive and dynamic user interface.
 - Utilizes **React Router** for smooth navigation between pages.
-- Stylish and customizable design with **SCSS** for a modern look and organized styling.
+- Stylish and customizable design with **SASS** for a modern look and organized styling.
 
 
 ## Back End
@@ -53,24 +64,9 @@ In the future, we plan to introduce the following features:
 - OTP/Email 2 step authentication.
 
 
-## Technologies Used
 
 
-**Front End:**
-- **React**
-- **React Router**
-- **React Portal**
-- **SCSS**
-
-**Back End:**
-- **Node.js**
-- **TypeScript**
-- **Express**
-- **MongoDB**
-- **Vite**
-
-
-## To Contribute or Use the Application
+## To Launch the Application
 
  **Step 1**. Clone repo to code editor
 
@@ -82,9 +78,10 @@ In the future, we plan to introduce the following features:
 
  **Step 5**. start the project with ```npm start``` or ```npm run dev``` (for dev mode)
 
-#### Authors
 
-- Nam Ha: [Github](https://github.com/username)
+## Authors
+
+- Nam Ha: [Github](https://github.com/namos2502)
 
 - John Costello: [Github](https://github.com/johnlcos)
 
