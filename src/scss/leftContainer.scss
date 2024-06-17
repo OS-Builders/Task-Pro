@@ -9,9 +9,8 @@
   text-align: center;
 
   .heading {
-    padding: 10px;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-      "Lucida Sans", Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;
   }
   footer {
     margin-top: auto;
@@ -42,7 +41,7 @@
   align-items: center;
   max-height: 90%;
   overflow-y: auto;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .board-selector {
   display: flex;
@@ -50,7 +49,7 @@
   align-items: center;
   color: white;
   background-color: rgb(22, 22, 22);
-  padding: 15px;
+  padding: 10px;
   border: 2px solid rgb(22, 22, 22);
   border-radius: 4px;
   font-weight: bold;
@@ -66,7 +65,7 @@
 }
 .selected {
   border: 2px solid #c3ff0e;
-  transform: scale(1.1);
+  transform: scale(1.07);
   text-transform: uppercase;
   box-shadow: 0 0 10px rgba(195, 255, 14, 0.5);
 }
@@ -75,7 +74,7 @@
 .new-board-btn {
   align-self: center;
   font-size: large;
-  width: 220px;
+  width: 200px;
   height: 50px;
   border: none;
   outline: none;
@@ -87,7 +86,7 @@
   border-radius: 5px;
 
   &:before {
-    content: "";
+    content: '';
     background: linear-gradient(
       45deg,
       #ff0000,
@@ -118,7 +117,7 @@
   // }
   &:after {
     z-index: -1;
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;

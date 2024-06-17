@@ -55,3 +55,19 @@
     background-color: rgb(24, 97, 157);
   }
 }
+
+.auth-guest {
+  align-self: center;
+  margin-top: 10px;
+  background-color: rgb(248, 178, 13);
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    color: white;
+    background-color: rgb(248, 178, 13);
+  }
+}

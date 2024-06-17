@@ -1,6 +1,6 @@
-import User from "../models/userModel.ts";
-import bcrypt from "bcryptjs";
-import { NextFunction, Request, Response } from "express";
+import User from '../models/userModel.ts';
+import bcrypt from 'bcryptjs';
+import { NextFunction, Request, Response } from 'express';
 
 const userController = {
   // middleware for creating a new user on signup
@@ -11,9 +11,9 @@ const userController = {
       // check if any input is missing
       if (!username || !password || !email) {
         return next({
-          log: "userController.createUser error, missing input",
+          log: 'userController.createUser error, missing input',
           status: 400,
-          message: { err: "Missing an input!" },
+          message: { err: 'Missing an input!' },
         });
       }
       //generate salt and encrypt with bcrypt function
@@ -34,7 +34,7 @@ const userController = {
       return next({
         log: `userController.createUser ERROR: ${err}`,
         status: 500,
-        message: { err: "Error occured creating user" },
+        message: { err: 'Error occured creating user' },
       });
     }
   },
@@ -43,12 +43,13 @@ const userController = {
   verifyUser: async (req: Request, res: Response, next: NextFunction) => {
     // obtain user name password from request body
     const { username, password } = req.body;
+
     // check for a missing input
     if (!username || !password) {
       return next({
-        log: "Missing username or password in verifyUser",
+        log: 'Missing username or password in verifyUser',
         status: 400,
-        message: { err: "Username and Password required" },
+        message: { err: 'Username and Password required' },
       });
     }
     try {
@@ -59,7 +60,7 @@ const userController = {
         return next({
           log: `userController.verifyUser ERROR: no user with input username found in DB`,
           status: 400,
-          message: { err: "Invalid username or password" },
+          message: { err: 'Invalid username or password' },
         });
       } else {
         // else a user is found, check passwords
@@ -69,7 +70,7 @@ const userController = {
           return next({
             log: `userController.verifyUser ERROR: input password does not match stored password`,
             status: 400,
-            message: { err: "Invalid username or password" },
+            message: { err: 'Invalid username or password' },
           });
         }
         // passwords do match, store username in res.locals to send back to frontend
@@ -81,7 +82,7 @@ const userController = {
       return next({
         log: `usersController.createUser ERROR: ${err}`,
         status: 500,
-        message: { err: "Error occured creating user" },
+        message: { err: 'Error occured creating user' },
       });
     }
   },

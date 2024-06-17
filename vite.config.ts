@@ -9,19 +9,19 @@ export default defineConfig({
     proxy: {
       "/user": {
         target:
-          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+          `http://localhost:${process.env.PORT}`,
         changeOrigin: true,
         secure: false,
       },
       "/boards": {
         target:
-          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+          `http://localhost:${process.env.PORT}`,
         changeOrigin: true,
         secure: false,
       },
       "/tasks": {
         target:
-          `http://localhost:${process.env.PORT}` || "http://localhost:3000",
+          `http://localhost:${process.env.PORT}`,
         changeOrigin: true,
         secure: false,
       },
